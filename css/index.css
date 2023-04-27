@@ -1,6 +1,6 @@
 @font-face {
     font-family: "EB-Garamond";
-    src: local('../fonts/EB_Garamond/EBGaramond08-Regular.ttf') format('truetype');
+    src: url('../fonts/EB_Garamond/EBGaramond12-Regular.woff') format('woff');
 }
 
 body {
