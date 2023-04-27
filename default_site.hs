@@ -8,8 +8,8 @@ import           Hakyll
 
 config :: Configuration
 config = defaultConfiguration
-    { destinationDirectory = "docs"
-    }
+	{ destinationDirectory = "docs"
+	}
 
 main :: IO ()
 main = hakyllWith config $ do
@@ -17,14 +17,10 @@ main = hakyllWith config $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "fonts/**/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler
- 
+
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
@@ -63,7 +59,7 @@ main = hakyllWith config $ do
 
             getResourceBody
                 >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/index.html" indexCtx
+                >>= loadAndApplyTemplate "templates/default.html" indexCtx
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
