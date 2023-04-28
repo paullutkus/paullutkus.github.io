@@ -1,6 +1,6 @@
 @font-face {
     font-family: "EB-Garamond";
-    src: url('../fonts/EB_Garamond/EBGaramond12-Regular.woff') format('woff');
+    src: url('../fonts/EB_Garamond/EBGaramond08-Regular.woff') format('woff');
 }
 
 body {
@@ -12,22 +12,19 @@ body {
     list-style-type: none;
 }
 
-div#landing ul#links {
-    list-style-type: none; 
+a {
+    color: #000000;
+}
+
+a:hover {
+    color: #000000;
+    text-decoration: none;
 }
 
 div#header {
     border-bottom: 2px dotted black;
     margin-bottom: 30px;
-    padding: 12px 0px 9px 0px;
-}
-
-div#logo a {
-    color: black;
-    float: left;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
+    padding: 21px 0px 10px 0px;
 }
 
 div#header #navigation {
@@ -38,10 +35,15 @@ div#header #navigation a {
     font-family: "EB-Garamond";
     color: black;
     font-size: 16px;
-    font-weight: none;
+    font-weight: normal;
     margin-left: 12px;
     text-decoration: none;
     text-transform: lowercase;
+}
+
+div#header #navigation a:hover{
+    color: #000000;
+    text-decoration: underline;
 }
 
 div#footer {
