@@ -11,5 +11,5 @@ courier {
 title: Contact
 ---
 
-You can reach me at &emsp;<courier>paul [dot] lutkus [at] gmail [dot] com</courier>
+You can reach me at paul [dot] lutkus [at] gmail [dot] com
 
