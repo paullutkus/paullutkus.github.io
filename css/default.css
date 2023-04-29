@@ -24,7 +24,7 @@ a:hover {
 div#header {
     border-bottom: 2px dotted black;
     margin-bottom: 30px;
-    padding: 21px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
 }
 
 div#header #navigation {
