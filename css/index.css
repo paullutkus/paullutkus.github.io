@@ -3,10 +3,52 @@
     src: url('../fonts/EB_Garamond/EBGaramond12-Regular.woff') format('woff');
 }
 
-h1 {
-    font-family: "EB-Garamond";
-    font-size: 28px;
-    margin: 0 0 5px 0;
+@media screen and (min-width: 800px) {
+        h1 {
+            font-family: "EB-Garamond";
+            font-size: 34px;
+            margin: 0 0 5px 0;
+        }
+
+        #landing ul#links {
+            font-family: "EB-Garamond";
+            font-size: 22px;
+            list-style-type: none; 
+            padding-left: 0;
+            margin: 0 0 20px 0;
+        }
+
+        #landing ul#links li#contact {
+            font-family: courier;
+            font-size: 17px;
+            color: #707070;
+            margin: 0;
+            padding-top: 5px;
+        }
+}
+
+@media screen and (max-width: 800px) {
+        h1 {
+            font-family: "EB-Garamond";
+            font-size: 28px;
+            margin: 0 0 5px 0;
+        }
+
+        #landing ul#links {
+            font-family: "EB-Garamond";
+            font-size: 18px;
+            list-style-type: none; 
+            padding-left: 0;
+            margin: 0 0 20px 0;
+        }
+
+        #landing ul#links li#contact {
+            font-family: courier;
+            font-size: 14px;
+            color: #707070;
+            margin: 0;
+            padding-top: 5px;
+        }
 }
 
 a {
@@ -23,14 +65,6 @@ a:hover {
     margin: 119px auto;
 }
 
-#landing ul#links {
-    font-family: "EB-Garamond";
-    font-size: 18px;
-    list-style-type: none; 
-    padding-left: 0;
-    margin: 0 0 20px 0;
-}
-
 #landing ul#links li {
     list-style-type: none; 
     padding-right: 25px;
@@ -39,14 +73,6 @@ a:hover {
 
 #landing ul#links li a:hover {
     text-decoration: none;
-}
-
-#landing ul#links li#contact {
-    font-family: courier;
-    font-size: 14px;
-    color: #707070;
-    margin: 0;
-    padding-top: 5px;
 }
 
 #landing .section ul {
