@@ -88,3 +88,39 @@ a:hover {
         }
 }
 
+@media (orientation: portrait) {
+        h1 {
+            font-family: "EB-Garamond";
+            font-size: 48px;
+            margin: 0 0 5px 0;
+        }
+
+        #landing ul#links {
+            font-family: "EB-Garamond";
+            font-size: 31px;
+            list-style-type: none; 
+            padding-left: 0;
+            margin: 0 0 20px 0;
+        }
+
+        #landing ul#links li#contact {
+            font-family: courier;
+            font-size: 24px;
+            color: #707070;
+            margin: 0;
+            padding-top: 5px;
+        }
+        #landing {
+            max-width: 700px;
+            margin: 119px auto;
+        }
+        #landing ul#links li {
+            list-style-type: none; 
+            padding-right: 25px;
+            padding-bottom: 4px;
+        }
+        #landing .section ul {
+            padding-left: 15px;
+        }
+}
+
