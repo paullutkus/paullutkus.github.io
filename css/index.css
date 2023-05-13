@@ -91,13 +91,13 @@ a:hover {
 @media (orientation: portrait) {
         h1 {
             font-family: "EB-Garamond";
-            font-size: 48px;
+            font-size: 60px;
             margin: 0 0 5px 0;
         }
 
         #landing ul#links {
             font-family: "EB-Garamond";
-            font-size: 31px;
+            font-size: 39px;
             list-style-type: none; 
             padding-left: 0;
             margin: 0 0 20px 0;
@@ -105,7 +105,7 @@ a:hover {
 
         #landing ul#links li#contact {
             font-family: courier;
-            font-size: 24px;
+            font-size: 30px;
             color: #707070;
             margin: 0;
             padding-top: 5px;
