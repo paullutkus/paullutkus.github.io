@@ -89,15 +89,19 @@ a:hover {
 }
 
 @media (orientation: portrait) {
+        #content { 
+            margin: 0 0 0 -150px; 
+        }
+
         h1 {
             font-family: "EB-Garamond";
-            font-size: 60px;
-            margin: 0 0 5px 0;
+            font-size: 68px;
+            margin: 0 0 2px 0;
         }
 
         #landing ul#links {
             font-family: "EB-Garamond";
-            font-size: 39px;
+            font-size: 44px;
             list-style-type: none; 
             padding-left: 0;
             margin: 0 0 20px 0;
@@ -105,10 +109,10 @@ a:hover {
 
         #landing ul#links li#contact {
             font-family: courier;
-            font-size: 30px;
+            font-size: 34px;
             color: #707070;
-            margin: 0;
-            padding-top: 5px;
+            margin: 0 -150px 0 0;
+            padding-top: 10px;
         }
         #landing {
             max-width: 700px;
