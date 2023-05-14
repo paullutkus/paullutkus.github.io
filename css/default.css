@@ -100,7 +100,7 @@ div.info {
 
 @media (orientation: portrait) {
         div#header {
-            border-bottom: 2px dotted black;
+            border-bottom: 6px dotted black;
             margin-bottom: 30px;
             padding: 10px 0px 10px 0px;
         }
@@ -112,7 +112,7 @@ div.info {
         div#header #navigation a {
             font-family: "EB-Garamond";
             color: black;
-            font-size: 30px;
+            font-size: 40px;
             font-weight: normal;
             margin-left: 12px;
             text-decoration: none;
