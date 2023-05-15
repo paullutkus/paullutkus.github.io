@@ -3,15 +3,6 @@
     src: url('../fonts/EB_Garamond/EBGaramond08-Regular.woff') format('woff');
 }
 
-body {
-    font-family: "EB-Garamond";
-    color: black;
-    font-size: 16px;
-    margin: 0px auto 0px auto;
-    width: 600px;
-    list-style-type: none;
-}
-
 a {
     color: #000000;
 }
@@ -21,30 +12,13 @@ a:hover {
     text-decoration: none;
 }
 
-div#footer {
-    border-top: solid 2px black;
-    color: #555;
-    font-size: 12px;
-    margin-top: 30px;
-    padding: 12px 0px 12px 0px;
-    text-align: right;
-}
-
-h1 {
-    font-size: 24px;
-}
-
-h2 {
-    font-size: 20px;
-}
-
 div.info {
     color: #555;
     font-size: 14px;
     font-style: italic;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1400px) and (orientation: landscape) {
         div#header {
             border-bottom: 2px dotted black;
             margin-bottom: 30px;
@@ -69,9 +43,34 @@ div.info {
             color: #000000;
             text-decoration: underline;
         }     
+
+        body {
+            font-family: "EB-Garamond";
+            color: black;
+            font-size: 16px;
+            margin: 0px auto 0px auto;
+            width: 600px;
+            list-style-type: none;
+        }
+        div#footer {
+            border-top: solid 2px black;
+            color: #555;
+            font-size: 12px;
+            margin-top: 30px;
+            padding: 12px 0px 12px 0px;
+            text-align: right;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
 }
 
-@media screen and (max-width: 1399px) {
+@media screen and (max-width: 1399px) and (orientation: landscape) {
         div#header {
             border-bottom: 2px dotted black;
             margin-bottom: 30px;
@@ -96,13 +95,57 @@ div.info {
             color: #000000;
             text-decoration: underline;
         }
+
+        body {
+            font-family: "EB-Garamond";
+            color: black;
+            font-size: 16px;
+            margin: 0px auto 0px auto;
+            width: 600px;
+            list-style-type: none;
+        }
+        div#footer {
+            border-top: solid 2px black;
+            color: #555;
+            font-size: 12px;
+            margin-top: 30px;
+            padding: 12px 0px 12px 0px;
+            text-align: right;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
 }
 
-@media (orientation: portrait) {
+@media (orientation: portrait) { 
+        html * {
+        max-height:1000000px;
+        }
+
+        div#content {
+            width: 92%;
+            margin: 0 auto 0 auto;
+        }
+
+        body {
+            font-family: "EB-Garamond";
+            color: black;
+            font-size: 40px;
+            margin: 0 auto 0 auto;
+            width: auto;
+            list-style-type: none;
+        }
+
         div#header {
             border-bottom: 6px dotted black;
-            margin: 100px 0 30px 0;
-            padding: 10px 0px 20px 0px;
+            width: 61%;
+            margin: 100px auto 30px auto;
+            padding: 10px 0 20px 0;
         }
 
         div#header #navigation {
@@ -122,5 +165,22 @@ div.info {
         div#header #navigation a:hover{
             color: #000000;
             text-decoration: underline;
+        }  
+
+        div#footer {
+            border-top: solid 2px black;
+            color: #555;
+            font-size: 12px;
+            margin-top: 30px;
+            padding: 12px 0px 12px 0px;
+            text-align: right;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        h2 {
+            font-size: 20px;
         }
 }
