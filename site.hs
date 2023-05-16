@@ -13,6 +13,10 @@ config = defaultConfiguration
 
 main :: IO ()
 main = hakyllWith config $ do
+    match "google9b53f6c193ef33e6.html" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
