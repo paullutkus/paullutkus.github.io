@@ -5,12 +5,13 @@ import           Hakyll
 import           Text.Pandoc.Extensions
 import           Text.Pandoc.Options
 import           Text.Pandoc.Highlighting
+import           System.FilePath                 ((</>))
 
 
 --------------------------------------------------------------------------------
 
 syntaxHighlightingStyle :: Style
-syntaxHighlightingStyle = kate
+syntaxHighlightingStyle = monochrome
 
 config :: Configuration
 config = defaultConfiguration
@@ -18,65 +19,71 @@ config = defaultConfiguration
     }
 
 main :: IO ()
-main = hakyllWith config $ do
-    match "google9b53f6c193ef33e6.html" $ do
-        route   idRoute
-        compile copyFileCompiler
+main = do 
+    -- Generate css stytling for code highlighting
+    let css = styleToCss syntaxHighlightingStyle
+    writeFile ("css" </> "syntax.css") css >> putStrLn " Generated css/syntax.css"
 
-    match "images/*" $ do
-        route   idRoute
-        compile copyFileCompiler
 
-    match "fonts/**/*" $ do
-        route   idRoute
-        compile copyFileCompiler
+    hakyllWith config $ do 
+            match "google9b53f6c193ef33e6.html" $ do
+                route   idRoute
+                compile copyFileCompiler
 
-    match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler
- 
-    match (fromList ["about.rst", "contact.markdown"]) $ do
-        route   $ setExtension "html"
-        compile $ pandocMathCompiler
-            >>= loadAndApplyTemplate "templates/default.html" defaultContext
-            >>= relativizeUrls
+            match "images/*" $ do
+                route   idRoute
+                compile copyFileCompiler
 
-    match "posts/*" $ do
-        route $ setExtension "html"
-        compile $ pandocMathCompiler
-            >>= loadAndApplyTemplate "templates/post.html"    postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= relativizeUrls
+            match "fonts/**/*" $ do
+                route   idRoute
+                compile copyFileCompiler
 
-    create ["archive.html"] $ do
-        route idRoute
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Archives"            `mappend`
-                    defaultContext
+            match "css/*" $ do
+                route   idRoute
+                compile compressCssCompiler
+         
+            match (fromList ["about.rst", "contact.markdown"]) $ do
+                route   $ setExtension "html"
+                compile $ pandocMathCompiler
+                    >>= loadAndApplyTemplate "templates/default.html" defaultContext
+                    >>= relativizeUrls
 
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-                >>= relativizeUrls
+            match "posts/*" $ do
+                route $ setExtension "html"
+                compile $ pandocMathCompiler
+                    >>= loadAndApplyTemplate "templates/post.html"    postCtx
+                    >>= loadAndApplyTemplate "templates/default.html" postCtx
+                    >>= relativizeUrls
 
-    match "index.html" $ do
-        route idRoute
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let indexCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Home"                `mappend`
-                    defaultContext
+            create ["archive.html"] $ do
+                route idRoute
+                compile $ do
+                    posts <- recentFirst =<< loadAll "posts/*"
+                    let archiveCtx =
+                            listField "posts" postCtx (return posts) `mappend`
+                            constField "title" "Archives"            `mappend`
+                            defaultContext
 
-            getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/index.html" indexCtx
-                >>= relativizeUrls
+                    makeItem ""
+                        >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+                        >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                        >>= relativizeUrls
 
-    match "templates/*" $ compile templateCompiler
+            match "index.html" $ do
+                route idRoute
+                compile $ do
+                    posts <- recentFirst =<< loadAll "posts/*"
+                    let indexCtx =
+                            listField "posts" postCtx (return posts) `mappend`
+                            constField "title" "Home"                `mappend`
+                            defaultContext
+
+                    getResourceBody
+                        >>= applyAsTemplate indexCtx
+                        >>= loadAndApplyTemplate "templates/index.html" indexCtx
+                        >>= relativizeUrls
+
+            match "templates/*" $ compile templateCompiler
 
 
 --------------------------------------------------------------------------------

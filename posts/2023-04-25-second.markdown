@@ -8,8 +8,11 @@
 ~~~
 
 ```python
-if x == 1:
-    print("wow")
+### This is a comment
+def func(x, y):
+    for y in range(x):
+        if x == 1:
+            print("wow")
 ```
 
 1. bulleted list 1
