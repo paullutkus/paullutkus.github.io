@@ -2,9 +2,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
 import           Hakyll
+import           Text.Pandoc.Extensions
+import           Text.Pandoc.Options
+import           Text.Pandoc.Highlighting
 
 
 --------------------------------------------------------------------------------
+
+syntaxHighlightingStyle :: Style
+syntaxHighlightingStyle = kate
 
 config :: Configuration
 config = defaultConfiguration
@@ -31,13 +37,13 @@ main = hakyllWith config $ do
  
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandocMathCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandocMathCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
@@ -79,3 +85,27 @@ postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
 
+pandocMathCompiler :: Compiler (Item String)
+pandocMathCompiler =
+    let 
+    mathExtensions = 
+        [ Ext_tex_math_dollars
+        , Ext_tex_math_double_backslash
+        , Ext_latex_macros 
+        ]
+    codeExtensions = 
+        [ Ext_fenced_code_blocks
+        , Ext_backtick_code_blocks                      
+        , Ext_fenced_code_attributes 
+        ]
+    newExtensions = foldr enableExtension defaultExtensions (mathExtensions <> codeExtensions)
+    defaultExtensions = writerExtensions defaultHakyllWriterOptions
+    writerOptions = 
+        defaultHakyllWriterOptions 
+        { writerExtensions = newExtensions
+        , writerHTMLMathMethod = MathJax ""
+        , writerHighlightStyle = Just syntaxHighlightingStyle 
+        }
+    in pandocCompilerWith defaultHakyllReaderOptions writerOptions
+        
+        

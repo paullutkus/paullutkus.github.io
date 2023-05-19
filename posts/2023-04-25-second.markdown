@@ -1,3 +1,17 @@
 ### TITLE ###
 ## Header ##
 # body #
+
+
+~~~
+    def func(wow)
+~~~
+
+```python
+if x == 1:
+    print("wow")
+```
+
+1. bulleted list 1
+2. two
+3. 3
