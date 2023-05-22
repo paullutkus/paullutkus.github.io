@@ -11,7 +11,7 @@ import           System.FilePath                 ((</>))
 --------------------------------------------------------------------------------
 
 syntaxHighlightingStyle :: Style
-syntaxHighlightingStyle = breezeDark
+syntaxHighlightingStyle = pygments
 
 config :: Configuration
 config = defaultConfiguration
@@ -24,7 +24,7 @@ main = do
     let css = styleToCss syntaxHighlightingStyle
     writeFile ("css" </> "syntax.css") css >> putStrLn " Generated css/syntax.css"
     appendFile ("css" </> "syntax.css") "div.sourceCode { padding: 0.75em; }" >> putStrLn " Updated padding for css/syntax.css"
-
+    appendFile ("css" </> "syntax.css") "div.sourceCode { background: #eeeeee; }" >> putStrLn " Updated background color for css/syntax.css"
 
 
     hakyllWith config $ do 

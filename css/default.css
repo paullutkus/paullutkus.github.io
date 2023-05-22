@@ -72,6 +72,10 @@ div.info {
         div.sourceCode {
             font-size: 22.5px;
         }
+
+        code {
+            font-size: 22.5px;
+        }
 }
 
 @media screen and (max-width: 1399px) and (orientation: landscape) {
@@ -126,6 +130,10 @@ div.info {
         }
         
         div.sourceCode {
+            font-size: 16px;
+        }
+
+        code {
             font-size: 16px;
         }
 }
@@ -194,6 +202,10 @@ div.info {
         }
 
         div.sourceCode {
+            font-size: 43.5px;
+        }
+
+        code {
             font-size: 43.5px;
         }
 }
