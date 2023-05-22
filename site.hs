@@ -11,7 +11,7 @@ import           System.FilePath                 ((</>))
 --------------------------------------------------------------------------------
 
 syntaxHighlightingStyle :: Style
-syntaxHighlightingStyle = monochrome
+syntaxHighlightingStyle = breezeDark
 
 config :: Configuration
 config = defaultConfiguration
@@ -23,6 +23,8 @@ main = do
     -- Generate css stytling for code highlighting
     let css = styleToCss syntaxHighlightingStyle
     writeFile ("css" </> "syntax.css") css >> putStrLn " Generated css/syntax.css"
+    appendFile ("css" </> "syntax.css") "div.sourceCode { padding: 0.75em; }" >> putStrLn " Updated padding for css/syntax.css"
+
 
 
     hakyllWith config $ do 
