@@ -47,12 +47,28 @@ div#stickyBox {
     flex-wrap: wrap;
 }
 
+.flex-item_side {
+    display: inline-flex;    
+    flex-direction: column;  
+    margin-left: 150px;
+    padding: 10px;
+    background-color: PaleGreen;
+}
+
+
 .flex-item {
     display: inline-flex;    
     flex-direction: column;  
     margin: 10px;
     padding: 10px;
     background-color: PaleGreen;
+}
+
+.inner-wrapper_side {
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    background-color: cornflowerblue;
 }
 
 .inner-wrapper {
@@ -89,6 +105,7 @@ div#stickyBox {
 .flex-image {
     justify-content: center;
     align-items: center;
+    overflow: scroll;
 }
 
 .flex-title {
