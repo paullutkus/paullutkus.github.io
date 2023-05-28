@@ -44,17 +44,29 @@ main = do
                 route   idRoute
                 compile compressCssCompiler
          
-            match (fromList ["about.rst", "contact.markdown"]) $ do
+            --match (fromList ["about.rst", "contact.markdown"]) $ do
+            --    route   $ setExtension "html"
+            --    compile $ pandocMathCompiler
+            --        >>= loadAndApplyTemplate "templates/about_default.html" defaultContext
+            --        >>= relativizeUrls
+
+            match "about.rst" $ do
                 route   $ setExtension "html"
                 compile $ pandocMathCompiler
-                    >>= loadAndApplyTemplate "templates/default.html" defaultContext
+                    >>= loadAndApplyTemplate "templates/about_default.html" defaultContext
+                    >>= relativizeUrls
+
+            match "contact.markdown" $ do
+                route   $ setExtension "html"
+                compile $ pandocMathCompiler
+                    >>= loadAndApplyTemplate "templates/contact_default.html" defaultContext
                     >>= relativizeUrls
 
             match "posts/*" $ do
                 route $ setExtension "html"
                 compile $ pandocMathCompiler
                     >>= loadAndApplyTemplate "templates/post.html"    postCtx
-                    >>= loadAndApplyTemplate "templates/default.html" postCtx
+                    >>= loadAndApplyTemplate "templates/post_default.html" postCtx
                     >>= relativizeUrls
 
             create ["archive.html"] $ do
