@@ -41,39 +41,55 @@ div#stickyBox {
 }
 
 .flex-container {
-  display: flex;
-  align-items: baseline;
-  width: var(--width);
-  background-color: lightgrey;
-  flex-wrap: wrap;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: baseline;
+    align-items: baseline;
+    width: var(--width);
+    background-color: Orchid;
+    flex-wrap: wrap;
 }
 
-.flex-item-side {
-  width: var(--sideWidth);
-  background-color: cornflowerblue;
+.flex-item {
+    display: inline-flex;    
+    flex-direction: column;  
+    background-color: PaleGreen;
 }
 
-.flex-item-main {
-  width: var(--mainWidth);
-  background-color: cornflowerblue;
+
+.inner-wrapper_side {
+    display: inline-block;
+    text-align: center;
+    width: var(--sideWidth);
+    background-color: cornflowerblue;
 }
 
-.w-full {  width: 100% }
-.baseline {
-  display: inline-block;
-  text-align: center;
+.inner-wrapper_main {
+    display: inline-block;
+    text-align: center;
+    width: var(--mainWidth);
+    background-color: cornflowerblue;
 }
 
-.border-b {
-  border-bottom: 1px solid #fff;
+.flex-body {
+    border-bottom: 1px solid #ff99cc;
 }
 
-.flex-img {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.flex-body-more {
+    float: left;
+    clear: left;
+    width: 100%;
 }
 
+.flex-image {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-title {
+    justify-content: center;
+    align-items: center;
+}
 
 @media screen and (min-width: 1400px) and (orientation: landscape) {
         div#header {
