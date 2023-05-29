@@ -35,12 +35,28 @@ div#stickyBox {
     height: 30px;
 }
 
+:root {
+    /* 43.92vw = 600px/1366px, which was the original width
+       I'd used for the main section  */
+    --width: 43.92vw;
+    
+    /* 47.76vw = 650px/1366px, leaves ~50px for the
+       back button */
+    --mainWidth: 47.76vw;
+
+    /* calculation is equivalent to:
+    --sideWidth: 3.84vw; */
+    --sideWidth: calc(var(--mainWidth) - var(--width));
+
+    --sidePadding: 5px;
+}
+
 .flex-container {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: baseline;
     align-items: baseline;
-    width: 700px;
+    width: var(--width);
     margin: 10px;
     padding: 10px;
     background-color: Orchid;
@@ -51,27 +67,27 @@ div#stickyBox {
     display: inline-flex;    
     flex-direction: column;  
     margin-left: 150px;
-    padding: 10px;
+    padding: var(--sidePadding);
     background-color: PaleGreen;
 }
 
 
-.flex-item {
+.flex-item_main {
     display: inline-flex;    
     flex-direction: column;  
     margin: 10px;
-    padding: 10px;
+    padding: 5px;
     background-color: PaleGreen;
 }
 
 .inner-wrapper_side {
     display: inline-block;
     text-align: center;
-    width: 50px;
+    width: var(--sideWidth);
     background-color: cornflowerblue;
 }
 
-.inner-wrapper {
+.inner-wrapper_main {
     display: inline-block;
     text-align: center;
     width: 200px;
