@@ -18,15 +18,6 @@ div.info {
     font-style: italic;
 }
 
-div#outerBox {
-    width: 650px;
-    display: flex;
-} 
-
-div#innerBox{
-    width: 600px;
-}
-
 div#stickyBox {
     position: sticky;
     top: 0;
@@ -36,19 +27,17 @@ div#stickyBox {
 }
 
 :root {
-    /* 43.92vw = 600px/1366px, which was the original width
+    /* 43.92vw ~ 600px/1366px, which was the original width
        I'd used for the main section  */
-    --width: 43.92vw;
+    --mainWidth: 43.9238653vw;
     
     /* 47.76vw = 650px/1366px, leaves ~50px for the
        back button */
-    --mainWidth: 47.76vw;
+    --width: 47.5841874vw;
 
     /* calculation is equivalent to:
-    --sideWidth: 3.84vw; */
-    --sideWidth: calc(var(--mainWidth) - var(--width));
-
-    --sidePadding: 5px;
+    --sideWidth: 3.6603221vw; */
+    --sideWidth: calc(var(--width) - var(--mainWidth));
 }
 
 .flex-container {
@@ -57,8 +46,6 @@ div#stickyBox {
     -webkit-align-items: baseline;
     align-items: baseline;
     width: var(--width);
-    margin: 10px;
-    padding: 10px;
     background-color: Orchid;
     flex-wrap: wrap;
 }
@@ -66,8 +53,6 @@ div#stickyBox {
 .flex-item_side {
     display: inline-flex;    
     flex-direction: column;  
-    margin-left: 150px;
-    padding: var(--sidePadding);
     background-color: PaleGreen;
 }
 
@@ -75,8 +60,6 @@ div#stickyBox {
 .flex-item_main {
     display: inline-flex;    
     flex-direction: column;  
-    margin: 10px;
-    padding: 5px;
     background-color: PaleGreen;
 }
 
@@ -90,22 +73,8 @@ div#stickyBox {
 .inner-wrapper_main {
     display: inline-block;
     text-align: center;
-    width: 200px;
+    width: var(--mainWidth);
     background-color: cornflowerblue;
-}
-
-.back-wrapper {
-    display: inline-block;
-    text-align: center;
-    width: 50px;
-    background-color: Salmon;
-}
-
-.main-wrapper {
-    display: inline-block;
-    text-align: center;
-    width: 600px;
-    background-color: PaleGreen;
 }
 
 .flex-body {
