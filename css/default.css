@@ -6,7 +6,6 @@
 a {
     color: #000000;
 }
-
 a:hover {
     color: #000000;
     text-decoration: none;
@@ -32,65 +31,54 @@ div.info {
     --sideWidth: calc(var(--width) - var(--mainWidth));
 }
 
-.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    align-self: flex-start;
-    height: 20vh;
-    top: 0;
-}
-
 .flex-container {
   display: flex;
   align-items: baseline;
-  width: var(--width);
+  justify-content: center;
+  width: 100%;
   height: 100vh;
-  background-color: lightgrey;
+  background-color: PaleGreen;
   flex-wrap: nowrap;
   overflow: auto;
 }
-
 .flex-item-side {
   width: var(--sideWidth);
   background-color: cornflowerblue;
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
 }
-
 .flex-item-main {
   width: var(--mainWidth);
+  height: 100%;
   background-color: cornflowerblue;
 }
-
 .h-full {  height: 100% }
 .w-full {  width: 100% }
-
 .baseline {
   display: inline-block;
   text-align: center;
 }
-
 .border-b {
   border-bottom: 1px solid #fff;
 }
-
 .flex-img {
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-
 @media screen and (min-width: 1400px) and (orientation: landscape) {
-        div#header {
+        div #header {
             border-bottom: 3px dotted black;
             margin-bottom: 47.25px;
             padding: 15px 0px 15px 0px;
+            position: fixed;
         }
-
-        div#header #navigation {
+        div #header #navigation {
             text-align: left;
         }
-
-        div#header #navigation a {
+        div #header #navigation a {
             font-family: "EB-Garamond";
             color: black;
             font-size: 25.3px;
@@ -99,12 +87,10 @@ div.info {
             text-decoration: none;
             text-transform: lowercase;
         }
-
-        div#header #navigation a:hover{
+        div #header #navigation a:hover{
             color: #000000;
             text-decoration: underline;
         }     
-
         body {
             font-family: "EB-Garamond";
             color: black;
@@ -113,7 +99,7 @@ div.info {
             width: 844px;
             list-style-type: none;
         }
-        div#footer {
+        div #footer {
             border-top: solid 2px black;
             color: #555;
             font-size: 19.125px;
@@ -121,19 +107,15 @@ div.info {
             padding: 15px 0 15px 0;
             text-align: right;
         }
-
         h1 {
             font-size: 38.25px;
         }
-
         h2 {
             font-size: 31.5px;
         }
-
         div.sourceCode {
             font-size: 22.5px;
         }
-
         code {
             font-size: 22.5px;
         }
@@ -141,16 +123,14 @@ div.info {
 
 @media screen and (max-width: 1399px) and (orientation: landscape) {
         div#header {
-            width: 600px;
+            width: var(--mainWidth);
             border-bottom: 2px dotted black;
             margin-bottom: 30px;
             padding: 10px 0px 10px 0px;
         }
-
         div#header #navigation {
             text-align: left;
         }
-
         div#header #navigation a {
             font-family: "EB-Garamond";
             color: black;
@@ -160,18 +140,18 @@ div.info {
             text-decoration: none;
             text-transform: lowercase;
         }
-
         div#header #navigation a:hover{
             color: #000000;
             text-decoration: underline;
         }
-
         body {
             font-family: "EB-Garamond";
             color: black;
-            font-size: 18px;
+            font-size:18px;
             margin: 0px auto 0px auto;
-            width: 600px;
+            justify-content:center;
+            width: 100%;
+            height: 100%;
             list-style-type: none;
         }
         div#footer {
@@ -182,19 +162,15 @@ div.info {
             padding: 12px 0px 12px 0px;
             text-align: right;
         }
-
         h1 {
             font-size: 27px;
         }
-
         h2 {
             font-size: 22.5px;
-        }
-        
+        }  
         div.sourceCode {
             font-size: 16px;
         }
-
         code {
             font-size: 16px;
         }
@@ -204,12 +180,10 @@ div.info {
         html * {
         max-height:1000000px;
         }
-
         div#content {
             width: 92%;
             margin: 0 auto 0 auto;
         }
-
         body {
             font-family: "EB-Garamond";
             color: black;
@@ -218,18 +192,15 @@ div.info {
             width: auto;
             list-style-type: none;
         }
-
         div#header {
             border-bottom: 6px dotted black;
             width: 61%;
             margin: 100px auto 62px auto;
             padding: 10px 0 20px 0;
         }
-
         div#header #navigation {
             text-align: left;
         }
-
         div#header #navigation a {
             font-family: "EB-Garamond";
             color: black;
@@ -239,12 +210,10 @@ div.info {
             text-decoration: none;
             text-transform: lowercase;
         }
-
         div#header #navigation a:hover{
             color: #000000;
             text-decoration: underline;
         }  
-
         div#footer {
             border-top: solid 2px black;
             color: #555;
@@ -254,19 +223,15 @@ div.info {
             padding: 12px 0px 12px 0px;
             text-align: right;
         }
-
         h1 {
             font-size: 59px;
         }
-
         h2 {
             font-size: 35px;
         }
-
         div.sourceCode {
             font-size: 43.5px;
         }
-
         code {
             font-size: 43.5px;
         }
