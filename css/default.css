@@ -18,14 +18,6 @@ div.info {
     font-style: italic;
 }
 
-div#stickyBox {
-    position: sticky;
-    top: 0;
-    background-color: green;
-    border: 2px solid #4CAF50;
-    height: 30px;
-}
-
 :root {
     /* 43.92vw ~ 600px/1366px, which was the original width
        I'd used for the main section  */
@@ -40,12 +32,22 @@ div#stickyBox {
     --sideWidth: calc(var(--width) - var(--mainWidth));
 }
 
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    align-self: flex-start;
+    height: 20vh;
+    top: 0;
+}
+
 .flex-container {
   display: flex;
   align-items: baseline;
   width: var(--width);
+  height: 100vh;
   background-color: lightgrey;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow: auto;
 }
 
 .flex-item-side {
@@ -58,7 +60,9 @@ div#stickyBox {
   background-color: cornflowerblue;
 }
 
+.h-full {  height: 100% }
 .w-full {  width: 100% }
+
 .baseline {
   display: inline-block;
   text-align: center;
@@ -139,8 +143,8 @@ div#stickyBox {
         div#header {
             width: 600px;
             border-bottom: 2px dotted black;
-            margin-bottom: 0px;
-            padding: 10px 0px 0px 0px;
+            margin-bottom: 30px;
+            padding: 10px 0px 10px 0px;
         }
 
         div#header #navigation {
