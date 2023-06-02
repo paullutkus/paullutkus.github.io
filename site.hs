@@ -80,7 +80,7 @@ main = do
 
                     makeItem ""
                         >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                        >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                        >>= loadAndApplyTemplate "templates/archive_default.html" archiveCtx
                         >>= relativizeUrls
 
             match "index.html" $ do

@@ -6,7 +6,6 @@
 a {
     color: #000000;
 }
-
 a:hover {
     color: #000000;
     text-decoration: none;
@@ -16,14 +15,8 @@ div.info {
     color: #555;
     font-size: 14px;
     font-style: italic;
-}
-
-div#stickyBox {
-    position: sticky;
-    top: 0;
-    background-color: green;
-    border: 2px solid #4CAF50;
-    height: 30px;
+    margin-top: -1em;
+    margin-bottom: 2em;
 }
 
 :root {
@@ -38,70 +31,77 @@ div#stickyBox {
     /* calculation is equivalent to:
     --sideWidth: 3.6603221vw; */
     --sideWidth: calc(var(--width) - var(--mainWidth));
+    
+    /* shift elements to account for sidebar width */
+    --leftShift: calc(-1 * var(--sideWidth) / 2);
 }
 
 .flex-container {
-    display: -webkit-flex;
     display: flex;
-    -webkit-align-items: baseline;
     align-items: baseline;
-    width: var(--width);
-    background-color: Orchid;
-    flex-wrap: wrap;
+    justify-content: center;
+    /* 100% viewport width plus half sidebar width (in pct) */
+    width: calc(100 + var(--leftShift));
+    height: 100vh;
+    margin-left: calc(2 * var(--leftShift));
+    flex-wrap: nowrap;
+    overflow: auto;
 }
-
-.flex-item {
-    display: inline-flex;    
-    flex-direction: column;  
-    background-color: PaleGreen;
-}
-
-
-.inner-wrapper_side {
-    display: inline-block;
-    text-align: center;
+.flex-item-side {
     width: var(--sideWidth);
-    background-color: cornflowerblue;
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    padding-right: 0.25em;
 }
-
-.inner-wrapper_main {
-    display: inline-block;
-    text-align: center;
+.flex-item-main {
     width: var(--mainWidth);
-    background-color: cornflowerblue;
+    height: 100%;
 }
-
-.flex-body {
-    border-bottom: 1px solid #ff99cc;
+.h-full {  height: 100% }
+.w-full {  width: 100% }
+.baseline {
+    display: inline-block;
+    text-align: left;
 }
-
-.flex-body-more {
-    float: left;
-    clear: left;
-    width: 100%;
-}
-
-.flex-image {
+.flex-img {
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+.wah {
+    font-size: 0px;
 }
 
-.flex-title {
-    justify-content: center;
-    align-items: center;
+.back {
+    font-style: italic;
+    text-align: center;
 }
+.back img {
+    object-fit: contain;
+    height: 1em;
+    width: 1em;
+}
+.back .caption {
+    padding-bottom: 0.95em;
+    margin-top: -0.20em;
+}
+
+.nonPost{
+    width: var(--mainWidth);
+}
+
 
 @media screen and (min-width: 1400px) and (orientation: landscape) {
         div#header {
+            width: var(--mainWidth);
             border-bottom: 3px dotted black;
             margin-bottom: 47.25px;
             padding: 15px 0px 15px 0px;
         }
-
         div#header #navigation {
             text-align: left;
         }
-
         div#header #navigation a {
             font-family: "EB-Garamond";
             color: black;
@@ -111,18 +111,18 @@ div#stickyBox {
             text-decoration: none;
             text-transform: lowercase;
         }
-
         div#header #navigation a:hover{
             color: #000000;
             text-decoration: underline;
         }     
-
         body {
             font-family: "EB-Garamond";
             color: black;
             font-size: 25.3px;
             margin: 0px auto 0px auto;
-            width: 844px;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
             list-style-type: none;
         }
         div#footer {
@@ -133,36 +133,40 @@ div#stickyBox {
             padding: 15px 0 15px 0;
             text-align: right;
         }
-
         h1 {
             font-size: 38.25px;
         }
-
         h2 {
-            font-size: 31.5px;
+            font-size: 30.813px;
         }
-
+        h3 {
+            font-size: 27.648;
+        }
         div.sourceCode {
             font-size: 22.5px;
         }
-
         code {
             font-size: 22.5px;
         }
+        .back {
+            font-size: 22px;
+        }
+        div.info {
+            font-size: 22px;
+        }
 }
+
 
 @media screen and (max-width: 1399px) and (orientation: landscape) {
         div#header {
-            width: 600px;
+            width: var(--mainWidth);
             border-bottom: 2px dotted black;
-            margin-bottom: 0px;
-            padding: 10px 0px 0px 0px;
+            margin-bottom: 30px;
+            padding: 10px 0px 10px 0px;
         }
-
         div#header #navigation {
             text-align: left;
         }
-
         div#header #navigation a {
             font-family: "EB-Garamond";
             color: black;
@@ -172,18 +176,18 @@ div#stickyBox {
             text-decoration: none;
             text-transform: lowercase;
         }
-
         div#header #navigation a:hover{
             color: #000000;
             text-decoration: underline;
         }
-
         body {
             font-family: "EB-Garamond";
             color: black;
-            font-size: 18px;
+            font-size:18px;
             margin: 0px auto 0px auto;
-            width: 600px;
+            justify-content:center;
+            width: 100%;
+            height: 100%;
             list-style-type: none;
         }
         div#footer {
@@ -194,34 +198,38 @@ div#stickyBox {
             padding: 12px 0px 12px 0px;
             text-align: right;
         }
-
         h1 {
             font-size: 27px;
         }
-
         h2 {
-            font-size: 22.5px;
+            font-size: 22.3264px;
+        }  
+        h3 {
+            font-size: 20.08;
         }
-        
         div.sourceCode {
             font-size: 16px;
         }
-
         code {
             font-size: 16px;
         }
+        .back {
+            font-size: 14px;
+        }
+        div.info {
+            font-size: 14px;
+        }
 }
+
 
 @media (orientation: portrait) { 
         html * {
         max-height:1000000px;
         }
-
         div#content {
-            width: 92%;
+            width: 100%;
             margin: 0 auto 0 auto;
         }
-
         body {
             font-family: "EB-Garamond";
             color: black;
@@ -230,18 +238,15 @@ div#stickyBox {
             width: auto;
             list-style-type: none;
         }
-
         div#header {
             border-bottom: 6px dotted black;
             width: 61%;
             margin: 100px auto 62px auto;
             padding: 10px 0 20px 0;
         }
-
         div#header #navigation {
             text-align: left;
         }
-
         div#header #navigation a {
             font-family: "EB-Garamond";
             color: black;
@@ -251,35 +256,49 @@ div#stickyBox {
             text-decoration: none;
             text-transform: lowercase;
         }
-
         div#header #navigation a:hover{
             color: #000000;
             text-decoration: underline;
         }  
-
         div#footer {
             border-top: solid 2px black;
             color: #555;
             width: 92%;
-            font-size: 12px;
+            font-size: 30px;
             margin: 30px auto 0 auto;
             padding: 12px 0px 12px 0px;
             text-align: right;
         }
-
         h1 {
             font-size: 59px;
         }
-
         h2 {
-            font-size: 35px;
+            font-size: 53.64px;
         }
-
+        h3 { 
+            font-size: 51.15px;
+        }
         div.sourceCode {
             font-size: 43.5px;
         }
-
         code {
             font-size: 43.5px;
+        }
+        .flex-item-side {
+            width: 2.3%;
+        }
+        .flex-item-main {
+            width: 92%;
+            margin-left: 0;
+        }
+        .back img {
+            padding-left: 1.5em;
+        }
+        .back .caption {
+            padding-bottom: 3.3em;
+            padding-left: 1em;
+        }
+        div.info {
+            font-size: 40px;
         }
 }
