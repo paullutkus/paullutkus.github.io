@@ -48,7 +48,7 @@ div.info {
     overflow: auto;
 }
 .flex-item-side {
-    width: var(--sideWidth);
+    min-width: var(--sideWidth);
     top: 0;
     position: -webkit-sticky;
     position: sticky;
@@ -83,7 +83,7 @@ div.info {
     width: 1em;
 }
 .back .caption {
-    padding-bottom: 0.95em;
+    padding-bottom: 1.20em;
     margin-top: -0.20em;
 }
 
@@ -214,7 +214,7 @@ div.info {
             font-size: 16px;
         }
         .back {
-            font-size: 14px;
+            font-size: 14px;    
         }
         div.info {
             font-size: 14px;
