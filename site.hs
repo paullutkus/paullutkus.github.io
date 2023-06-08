@@ -109,6 +109,10 @@ postCtx =
 pandocMathCompiler :: Compiler (Item String)
 pandocMathCompiler =
     let 
+    markdownExtensions = 
+        [ Ext_markdown_in_html_blocks 
+        , Ext_bracketed_spans
+        ]
     mathExtensions = 
         [ Ext_tex_math_dollars
         , Ext_tex_math_double_backslash
@@ -119,8 +123,8 @@ pandocMathCompiler =
         , Ext_backtick_code_blocks                      
         , Ext_fenced_code_attributes 
         ]
-    newExtensions = foldr enableExtension defaultExtensions (mathExtensions <> codeExtensions)
-    defaultExtensions = writerExtensions defaultHakyllWriterOptions
+    defaultExtensions = writerExtensions defaultHakyllWriterOptions  
+    newExtensions = foldr enableExtension defaultExtensions (markdownExtensions <> (mathExtensions <> codeExtensions))
     writerOptions = 
         defaultHakyllWriterOptions 
         { writerExtensions = newExtensions
