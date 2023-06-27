@@ -1,11 +1,18 @@
 @font-face {
     font-family: "EB-Garamond";
-    src: url('../fonts/EB_Garamond/EBGaramond08-Regular.woff') format('woff');
+    src: url('../fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "EB-Garamond-SemiBold";
+    src: url('../fonts/EB_Garamond/EBGaramond-SemiBold.ttf') format('truetype');
 }
 
 a {
     color: #000000;
 }
+
 a:hover {
     color: #000000;
     text-decoration: none;
@@ -20,16 +27,22 @@ div.info {
 :root {
     /* 43.92vw ~ 600px/1366px, which was the original width
        I'd used for the main section  */
-    --mainWidth: 43.9238653vw;
-    
-    /* 47.76vw = 650px/1366px, leaves ~50px for the
-       back button */
-    --width: 47.5841874vw;
+    /* previous version:
+    --mainWidth: 43.9238653vw; */
+    --mainWidth: 46.852123vw;
 
     /* calculation is equivalent to:
     --sideWidth: 3.6603221vw; */
-    --sideWidth: calc(var(--width) - var(--mainWidth));
+    /* previous version:
+    --sideWidth: calc(var(--width) - var(--mainWidth)); */
+    --sideWidth: 3.6603221vw;
     
+    /* 47.76vw = 650px/1366px, leaves ~50px for the
+       back button */
+    /* previous version:
+    --width: 47.5841874vw;*/
+    --width: calc(var(--sideWidth) + var(--mainWidth));
+        
     /* shift elements to account for sidebar width */
     --leftShift: calc(-1 * var(--sideWidth) / 2);
 }
@@ -42,13 +55,12 @@ div#header {
     width: var(--mainWidth);
 }
 
-
 @media screen and (min-width: 1400px) and (orientation: landscape) {
         div#header {
             width: var(--mainWidth);
             border-bottom: 3px dotted black;
             margin-bottom: 47.25px;
-            padding: 15px 0px 15px 0px;
+            padding: 15px 0 15px 0;
         }
         div#header #navigation {
             text-align: left;
@@ -70,7 +82,7 @@ div#header {
             font-family: "EB-Garamond";
             color: black;
             font-size: 25.3px;
-            margin: 0px auto 0px auto;
+            margin: 0 auto 0 auto;
             justify-content: center;
             list-style-type: none;
         }
@@ -86,10 +98,13 @@ div#header {
             font-size: 38.25px;
         }
         h2 {
-            font-size: 30.813px;
+            font-size: 38.25px;
         }
         h3 {
-            font-size: 27.648;
+            font-size: 30.813px;
+        }
+        h4 {
+            font-size: 27.648px;
         }
         div.sourceCode {
             font-size: 22.5px;
@@ -104,7 +119,6 @@ div#header {
             font-size: 22px;
         }
 }
-
 
 @media screen and (max-width: 1399px) and (orientation: landscape) {
         div#header {
@@ -133,7 +147,7 @@ div#header {
             font-family: "EB-Garamond";
             color: black;
             font-size:18px;
-            margin: 0px auto 0px auto;
+            margin: 0 auto 0 auto;
             justify-content:center;
             list-style-type: none;
         }
@@ -142,17 +156,20 @@ div#header {
             color: #555;
             font-size: 13.5px;
             margin-top: 30px;
-            padding: 12px 0px 12px 0px;
+            padding: 12px 0 12px 0;
             text-align: right;
         }
         h1 {
             font-size: 27px;
         }
         h2 {
-            font-size: 22.3264px;
+            font-size: 27px;
         }  
         h3 {
-            font-size: 20.08;
+            font-size: 22.3264px;
+        }
+        h4 {
+            font-size: 20.08px;
         }
         div.sourceCode {
             font-size: 16px;
@@ -167,7 +184,6 @@ div#header {
             font-size: 14px;
         }
 }
-
 
 @media (orientation: portrait) { 
         html * {
@@ -213,17 +229,20 @@ div#header {
             width: 92%;
             font-size: 30px;
             margin: 30px auto 0 auto;
-            padding: 12px 0px 12px 0px;
+            padding: 12px 0 12px 0;
             text-align: right;
         }
         h1 {
-            font-size: 59px;
+            font-size: 53px;
         }
         h2 {
-            font-size: 53.64px;
+            font-size: 53px;
         }
         h3 { 
-            font-size: 51.15px;
+            font-size: 51.519px;
+        }
+        h4 {
+            font-size: 50.587px;
         }
         div.sourceCode {
             font-size: 43.5px;
@@ -248,4 +267,19 @@ div#header {
         div.info {
             font-size: 40px;
         }
+}
+
+@-moz-document url-prefix() {
+    body h1 {
+        font-family: "EB-Garamond-SemiBold";
+    }
+    body h2 {
+        font-family: "EB-Garamond-SemiBold";
+    }
+    body h3 {
+        font-family: "EB-Garamond-SemiBold";
+    }
+    body h4 {
+        font-family: "EB-Garamond-SemiBold";
+    }
 }
