@@ -7,10 +7,11 @@
         <meta name="google-site-verification" content="_80XeoFjcnfXZI18dveBZq5VBZK4YJKZ2BFax07Is1w" />
         <title>Paul Lutkus - Boundary Point Detection Algorithms</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" /> 
-        <link rel="stylesheet" type="text/css" href="../css/post.css" /> 
         <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
-        <link rel="stylesheet" type="text/css" href="../css/formats.css" />
-        <link rel="icon" href="../images/ditto_resize.png">       
+        <link rel="stylesheet" type="text/css" href="../css/post.css" />   
+		<link rel="stylesheet" type="text/css" href="../css/formats.css" />  
+		<link rel="stylesheet" type="text/css" href="../css/mobile.css" />
+        <link rel="icon" href="../images/ditto_resize.png">           
     </head>
     <body>
         <div class="flex-container">
@@ -81,11 +82,12 @@ Loosely, the procedure is as follows:</p>
 3. Find the point which generates the minimum 
    nonnegative slope (m) when paired with the 
    focus.
-4. Let this point be the 'new focus', and add it
-   to the hull.
+4. Let this point be the 'new focus', and add 
+   it to the hull.
 5. Rotate the dataset clockwise by arctan(m) 
-   around the new focus, so that it is horizontally
-   aligned with the previous focus.</code></pre>
+   around the new focus, so that it is 
+   horizontally aligned with the previous 
+   focus.</code></pre>
 </blockquote>
 <p>Since, for each hull point, we must iterate through each of the other <span class="math inline">\(n\)</span>
 points, this procedure has a time-complexity of <span class="math inline">\(O(hn)\)</span>, where <span class="math inline">\(h\)</span> is the
@@ -100,9 +102,9 @@ maximum in <span class="math inline">\(y\)</span>.</p>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pt_max <span class="op">=</span> pts[<span class="dv">0</span>,:]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pts_copy <span class="op">=</span> [pt_max]</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, x <span class="kw">in</span> <span class="bu">enumerate</span>(pts[<span class="dv">1</span>:]):</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x[<span class="dv">1</span>] <span class="op">&gt;</span> pt_max[<span class="dv">1</span>]:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        pt_max <span class="op">=</span> x</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    pts_copy.append(x)</span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>	<span class="cf">if</span> x[<span class="dv">1</span>] <span class="op">&gt;</span> pt_max[<span class="dv">1</span>]:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>		pt_max <span class="op">=</span> x</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>	pts_copy.append(x)	</span></code></pre></div>
 <h3 id="the-central-loop">The Central Loop</h3>
 <p>This section covers  <b><code>step 3</code></b>  and  <b><code>step 4</code></b> 
 and is primarily a do-while-loop that checks whether each new focus is the
@@ -127,35 +129,37 @@ and is what we’ll discuss next.</p>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>hull <span class="op">=</span> []</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>total_theta <span class="op">=</span> <span class="dv">0</span> <span class="co"># this will come in handy later</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    m_min <span class="op">=</span> np.infty</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, pt <span class="kw">in</span> <span class="bu">enumerate</span>(pts_copy):</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># compute slope, update focus candidate 'fc' if </span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># slope is nonnegative and lesser than previous</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> (f[<span class="dv">1</span>] <span class="op">-</span> pt[<span class="dv">1</span>]) <span class="op">/</span> (f[<span class="dv">0</span>] <span class="op">-</span> pt[<span class="dv">0</span>])</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> m <span class="op">&lt;</span> min_m:</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>            fc <span class="op">=</span> idx</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            min_m <span class="op">=</span> m </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># if same slope as previous candidate, take</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># whichever is further from current focus</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> m <span class="op">==</span> m_min:</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> np.linalg.norm(f <span class="op">-</span> pt) </span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>             <span class="op">&gt;</span> np.linalg.norm(f <span class="op">-</span> pts_copy[fc]):</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            fc <span class="op">=</span> idx            </span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># new focus is pt w/ minimum positive slope wrt prev </span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># focus, no need to consider in next iteration</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> pts_copy[fc]</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    hull.append(f)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    pts_copy.remove(fc)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">############</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># THE REST #</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">############</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># a do-while in python:</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> f <span class="op">!=</span> pt_max:</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span>  </span></code></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>	m_min <span class="op">=</span> np.infty</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>	<span class="cf">for</span> idx, pt <span class="kw">in</span> <span class="bu">enumerate</span>(pts_copy):</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>		<span class="co"># compute slope, update focus candidate </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>		<span class="co"># 'fc' if slope is nonnegative and lesser </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>		<span class="co"># than previous</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>		m <span class="op">=</span> (f[<span class="dv">1</span>] <span class="op">-</span> pt[<span class="dv">1</span>]) <span class="op">/</span> (f[<span class="dv">0</span>] <span class="op">-</span> pt[<span class="dv">0</span>])</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>		<span class="cf">if</span> m <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> m <span class="op">&lt;</span> min_m:</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>			fc <span class="op">=</span> idx</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>			min_m <span class="op">=</span> m </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>		<span class="co"># if same slope as previous candidate, take</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>		<span class="co"># whichever is further from current focus</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>		<span class="cf">elif</span> m <span class="op">==</span> m_min:</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>		<span class="cf">if</span> np.linalg.norm(f <span class="op">-</span> pt) </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>		   <span class="op">&gt;</span> np.linalg.norm(f <span class="op">-</span> pts_copy[fc]):</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>			fc <span class="op">=</span> idx            </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>	<span class="co"># new focus is pt w/ minimum positive slope </span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>	<span class="co"># wrt prev focus, no need to consider in </span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>	<span class="co"># next iteration</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>	f <span class="op">=</span> pts_copy[fc]</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>	hull.append(f)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>	pts_copy.remove(fc)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>	<span class="co">############</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>	<span class="co"># THE REST #</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>	<span class="co">############</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>	<span class="co"># a do-while in python:</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>	<span class="cf">if</span> f <span class="op">!=</span> pt_max:</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>		<span class="cf">continue</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>	<span class="cf">else</span>:</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>		<span class="cf">break</span> 	</span></code></pre></div>
 <h3 id="tracking-affine-transformations">Tracking Affine Transformations</h3>
 <p>We next regard  <b><code>step 5</code></b>  and consider how the dataset must be
 rotated between iterations to ensure that the minimum nonnegative slope

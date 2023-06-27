@@ -40,23 +40,24 @@ Loosely, the procedure is as follows:
 
 <u>
 
-    Gift Wrapping
+	Gift Wrapping
 
 </u>
 
->     1. Find the maximum point along a dimension 
->        (wlog, highest point in Y), call it
->        the 'first focus'.
->     2. Repeat 3-5 until the 'new focus' is the 
->        first focus:
->     3. Find the point which generates the minimum 
->        nonnegative slope (m) when paired with the 
->        focus.
->     4. Let this point be the 'new focus', and add it
->        to the hull.
->     5. Rotate the dataset clockwise by arctan(m) 
->        around the new focus, so that it is horizontally
->        aligned with the previous focus.
+> 	1. Find the maximum point along a dimension 
+>	   (wlog, highest point in Y), call it
+>	   the 'first focus'.
+> 	2. Repeat 3-5 until the 'new focus' is the 
+>	   first focus:
+>	3. Find the point which generates the minimum 
+>	   nonnegative slope (m) when paired with the 
+>	   focus.
+>	4. Let this point be the 'new focus', and add 
+> 	   it to the hull.
+>	5. Rotate the dataset clockwise by arctan(m) 
+> 	   around the new focus, so that it is 
+>	   horizontally aligned with the previous 
+>	   focus.
 
 Since, for each hull point, we must iterate through each of the other $n$
 points, this procedure has a time-complexity of $O(hn)$, where $h$ is the 
@@ -76,9 +77,9 @@ maximum in $y$.
 pt_max = pts[0,:]
 pts_copy = [pt_max]
 for idx, x in enumerate(pts[1:]):
-    if x[1] > pt_max[1]:
-        pt_max = x
-    pts_copy.append(x)
+	if x[1] > pt_max[1]:
+		pt_max = x
+	pts_copy.append(x)	
 ```
 
 ### The Central Loop ###
@@ -112,35 +113,37 @@ f = pt_max
 hull = []
 total_theta = 0 # this will come in handy later
 while True:
-    m_min = np.infty
-    for idx, pt in enumerate(pts_copy):
-        # compute slope, update focus candidate 'fc' if 
-        # slope is nonnegative and lesser than previous
-        m = (f[1] - pt[1]) / (f[0] - pt[0])
-        if m >= 0 and m < min_m:
-            fc = idx
-            min_m = m 
-        # if same slope as previous candidate, take
-        # whichever is further from current focus
-        elif m == m_min:
-            if np.linalg.norm(f - pt) 
-             > np.linalg.norm(f - pts_copy[fc]):
-            fc = idx            
-    # new focus is pt w/ minimum positive slope wrt prev 
-    # focus, no need to consider in next iteration
-    f = pts_copy[fc]
-    hull.append(f)
-    pts_copy.remove(fc)
+	m_min = np.infty
+	for idx, pt in enumerate(pts_copy):
+		# compute slope, update focus candidate 
+		# 'fc' if slope is nonnegative and lesser 
+		# than previous
+		m = (f[1] - pt[1]) / (f[0] - pt[0])
+		if m >= 0 and m < min_m:
+			fc = idx
+			min_m = m 
+		# if same slope as previous candidate, take
+		# whichever is further from current focus
+		elif m == m_min:
+		if np.linalg.norm(f - pt) 
+		   > np.linalg.norm(f - pts_copy[fc]):
+			fc = idx            
+	# new focus is pt w/ minimum positive slope 
+	# wrt prev focus, no need to consider in 
+	# next iteration
+	f = pts_copy[fc]
+	hull.append(f)
+	pts_copy.remove(fc)
 
-    ############
-    # THE REST #
-    ############
+	############
+	# THE REST #
+	############
 
-    # a do-while in python:
-    if f != pt_max:
-        continue
-    else:
-        break  
+	# a do-while in python:
+	if f != pt_max:
+		continue
+	else:
+		break 	
 ```
 
 ### Tracking Affine Transformations ###

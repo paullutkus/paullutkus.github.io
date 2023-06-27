@@ -16,7 +16,7 @@ div.info {
     margin-left: calc(2 * var(--leftShift));
     flex-wrap: nowrap;
     overflow: auto;
-}
+}	
 .flex-item-side {
     min-width: var(--sideWidth);
     top: 0;
@@ -70,4 +70,12 @@ body p {
 }
 body h3 {
     margin-bottom: 0.5em; 
+}
+
+div.sourceCode {
+	tab-size: 4;
+}
+
+code {
+	tab-size: 4;
 }
