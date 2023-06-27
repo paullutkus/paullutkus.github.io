@@ -61,4 +61,4 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-div.sourceCode { padding: 0.75em; }div.sourceCode { background: #eeeeee; }
+div.sourceCode { padding: 0.75em; }div.sourceCode { overflow: visible; }div.sourceCode { border-top: 0.18em dotted black; border-bottom: 0.18em dotted black }

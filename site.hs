@@ -27,7 +27,10 @@ main = do
     let css = styleToCss syntaxHighlightingStyle
     writeFile ("css" </> "syntax.css") css >> putStrLn " Generated css/syntax.css"
     appendFile ("css" </> "syntax.css") "div.sourceCode { padding: 0.75em; }" >> putStrLn " Updated padding for css/syntax.css"
-    appendFile ("css" </> "syntax.css") "div.sourceCode { background: #eeeeee; }" >> putStrLn " Updated background color for css/syntax.css"
+    appendFile ("css" </> "syntax.css") "div.sourceCode { overflow: visible; }" >> putStrLn " Updated overflow for css/syntax.css"
+    appendFile ("css" </> "syntax.css") "div.sourceCode { border-top: 0.18em dotted black; border-bottom: 0.18em dotted black }" 
+        >> putStrLn " Added border to css/syntax.css"
+
 
 
     hakyllWith config $ do 
