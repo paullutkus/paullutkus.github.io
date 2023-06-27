@@ -29,7 +29,7 @@ div.info {
        I'd used for the main section  */
     /* previous version:
     --mainWidth: 43.9238653vw; */
-    --mainWidth: 46.852123vw;
+    --mainWidth: 46.8521229868vw;
 
     /* calculation is equivalent to:
     --sideWidth: 3.6603221vw; */
@@ -282,4 +282,3 @@ div#header {
     body h4 {
         font-family: "EB-Garamond-SemiBold";
     }
-}
