@@ -1,6 +1,7 @@
 ---
 title: About
 ---
+
 | I'll be graduating in May 2023 from the University of Pennsylvania with an MSc in 
 | Electrical Engineering.
 | 

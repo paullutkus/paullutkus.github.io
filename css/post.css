@@ -1,6 +1,12 @@
 @font-face {
     font-family: "EB-Garamond";
-    src: url('../fonts/EB_Garamond/EBGaramond08-Regular.woff') format('woff');
+    src: url('../fonts/EB_Garamond/EBGaramond-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "EB-Garamond-SemiBold";
+    src: url('../fonts/EB_Garamond/EBGaramond-SemiBold.ttf') format('truetype');
 }
 
 a {
@@ -22,16 +28,22 @@ div.info {
 :root {
     /* 43.92vw ~ 600px/1366px, which was the original width
        I'd used for the main section  */
-    --mainWidth: 43.9238653vw;
-    
-    /* 47.76vw = 650px/1366px, leaves ~50px for the
-       back button */
-    --width: 47.5841874vw;
+    /* previous version:
+    --mainWidth: 43.9238653vw; */
+    --mainWidth: 46.852123vw;
 
     /* calculation is equivalent to:
     --sideWidth: 3.6603221vw; */
-    --sideWidth: calc(var(--width) - var(--mainWidth));
+    /* previous version:
+    --sideWidth: calc(var(--width) - var(--mainWidth)); */
+    --sideWidth: 3.6603221vw;
     
+    /* 47.76vw = 650px/1366px, leaves ~50px for the
+       back button */
+    /* previous version:
+    --width: 47.5841874vw;*/
+    --width: calc(var(--sideWidth) + var(--mainWidth));
+        
     /* shift elements to account for sidebar width */
     --leftShift: calc(-1 * var(--sideWidth) / 2);
 }
@@ -98,7 +110,6 @@ body h3 {
     margin-bottom: 0.5em; 
 }
 
-
 @media screen and (min-width: 1400px) and (orientation: landscape) {
         div#header {
             width: var(--mainWidth);
@@ -141,7 +152,7 @@ body h3 {
             text-align: right;
         }
         h1 {
-            font-size: 55.69px;
+            font-size: 38.25px;
         }
         h2 {
             font-size: 38.25px;
@@ -151,6 +162,11 @@ body h3 {
         }
         h4 {
             font-size: 27.648;
+        }
+        @-moz-document url-prefix() {
+            h1 h2 h3 h4 {
+                font-family: "EB-Garamond-SemiBold";
+            }
         }
         div.sourceCode {
             font-size: 22.5px;
@@ -165,7 +181,6 @@ body h3 {
             font-size: 22px;
         }
 }
-
 
 @media screen and (max-width: 1399px) and (orientation: landscape) {
         div#header {
@@ -220,6 +235,17 @@ body h3 {
         h4 {
             font-size: 20.08px;
         }
+        @-moz-document url-prefix() {
+            body h1 {
+                font-family: "EB-Garamond-SemiBold";
+            }
+            body h2 {
+                font-family: "EB-Garamond-SemiBold";
+            }
+            body h3 {
+                font-family: "EB-Garamond-SemiBold";
+            }
+        } 
         div.sourceCode {
             font-size: 16px;
         }
@@ -315,3 +341,4 @@ body h3 {
             font-size: 40px;
         }
 }
+
