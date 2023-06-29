@@ -1,5 +1,6 @@
 ---
 title: The Default Mode Network
+tags: misc, neurosci
 ---
 
 I've always been fascinated by the default mode network (DMN) due to its 
