@@ -1,2 +1,51 @@
-Here you can find all my previous posts:
-$partial("templates/post-list.html")$
+<div class="row">
+	<div class="two_thirds_col">
+		<h1 style="margin-bottom:1%;">$title$</h1>
+		Here you can find all my previous posts:
+	</div>
+	<div class="three_col">
+		<h4 style="margin-bottom:1%; font-weight:normal"><i>Tags:</i></h4>
+		$for(tagsList)$
+			<a style="font-size:0.75em;font-style:italic" href="tags/$tag$.html">$tag$</a>$sep$,
+		$endfor$
+	</div>
+</div>
+<div class="row">
+	<div class="three_col">
+		<h3 style="margin-bottom: 0.5em;"><u>Engineering</u></h3>
+		<div style="border-right: 0px solid black; margin-right: 1em;">
+			<ul>
+				$for(engPosts)$
+					<li>
+						<a href="$url$">$title$</a> <br> 
+						<span style="margin-left:0em; font-size:0.88em;"> - <i>$date$</i> </span>
+					</li>
+				$endfor$
+			</ul>
+		</div>
+	</div>
+	<div class="three_col">
+		<h3 style="margin-bottom:0.5em;"><u>Mathematics</u></h3>
+		<div style="border-right: 0px solid black; margin-right: 1em;">
+			<ul>
+				$for(mathPosts)$
+					<li>
+						<a href="$url$">$title$</a> <br> 
+						<span style="margin-left:0em; font-size:0.88em;"> - <i>$date$</i> </span>
+					</li>
+				$endfor$
+			</ul>
+		</div>
+	</div>
+	<div class="three_col">
+		<h3 style="margin-bottom:0.5em;"><u>Miscellaneous</u></h3>
+		<ul>
+			$for(miscPosts)$
+				<li>
+					<a href="$url$">$title$</a> <br> 
+					<span style="margin-left:0em; font-size:0.88em;"> - <i>$date$</i> </span>
+				</li>
+			$endfor$
+		</ul>
+	</div>
+</div>

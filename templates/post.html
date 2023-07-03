@@ -4,9 +4,10 @@
         by $author$
     $endif$
 	<br>
-	$if(tags)$
-		Tags: $tags$
-	$endif$
+	Tags: 
+	$for(tagsList)$
+		<a href="../../tags/$tag$.html">$tag$</a>$sep$,
+	$endfor$
 </div>
 
 <!--
