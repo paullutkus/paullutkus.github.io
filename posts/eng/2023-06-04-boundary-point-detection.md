@@ -1,5 +1,6 @@
 ---
 title: Boundary Point Detection Algorithms
+tags: Geometry
 ---
 
 ## [Introduction]{.underline} ##

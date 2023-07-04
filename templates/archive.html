@@ -1,17 +1,18 @@
 <div class="row">
-	<div class="two_thirds_col">
-		<h1 style="margin-bottom:1%;">$title$</h1>
-		Here you can find all my previous posts:
+	<div class="archive_title_col">
+		<h1 style="margin-top:0;margin-bottom:1%;">$title$</h1>
+		Check out my <a href="researchNotes.html"><b>research journal</b></a> and
+		<a href="bookNotes.html"><b>book notes</b></a>.
 	</div>
-	<div class="three_col">
-		<h4 style="margin-bottom:1%; font-weight:normal"><i>Tags:</i></h4>
+	<div class="archive_tags_col">
+		<h4 style="font-weight:normal;display:inline"><i>Tags:</i></h4>
 		$for(tagsList)$
-			<a style="font-size:0.75em;font-style:italic" href="tags/$tag$.html">$tag$</a>$sep$,
+			<a style="font-size:0.75em;font-style:italic" href="tags/posts/$tag$.html">$tag$</a>$sep$,
 		$endfor$
 	</div>
 </div>
 <div class="row">
-	<div class="three_col">
+	<div class="one_third_col">
 		<h3 style="margin-bottom: 0.5em;"><u>Engineering</u></h3>
 		<div style="border-right: 0px solid black; margin-right: 1em;">
 			<ul>
@@ -24,7 +25,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="three_col">
+	<div class="one_third_col">
 		<h3 style="margin-bottom:0.5em;"><u>Mathematics</u></h3>
 		<div style="border-right: 0px solid black; margin-right: 1em;">
 			<ul>
@@ -37,7 +38,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="three_col">
+	<div class="one_third_col">
 		<h3 style="margin-bottom:0.5em;"><u>Miscellaneous</u></h3>
 		<ul>
 			$for(miscPosts)$

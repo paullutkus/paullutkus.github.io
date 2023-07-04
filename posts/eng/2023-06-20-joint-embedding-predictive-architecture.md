@@ -1,6 +1,7 @@
 ---
 title: Joint-Embedding Predictive Architectures
 link-citations: true
+tags: Machine Learning
 ---
 
 ## [Introduction]{.underline} ##

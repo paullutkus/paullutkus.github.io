@@ -1,6 +1,30 @@
-.three_col {
+.one_third_col {
 	float: left;
 	width: 33.33%;
+}
+
+.notes_right_col {
+	float: left;
+	width: 33.33%;
+	margin-top: 1.2%
+}
+
+.archive_title_col {
+	float: left;
+	width: 50.00%;
+	box-sizing: border-box;
+	padding-right: 10%;
+}
+
+.archive_tags_col {
+	float: left;
+	width: 50.00%;
+	margin-top: 1%;
+}
+
+.half_col {
+	float:left;
+	width: 50.00%
 }
 
 .two_thirds_col {
@@ -25,7 +49,8 @@ li {
 	margin-bottom: 5%;
 }
 
+/*
 div#header {
 	margin-bottom: 0;
-}
+}*/
 

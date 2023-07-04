@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
+
 import           Data.Monoid (mappend)
 import           Hakyll
 import           Text.Pandoc as Pandoc
@@ -10,10 +11,8 @@ import qualified Data.Map as M
 import           Data.List
 import           Data.Function                   ((&))
 import           System.FilePath                 ((</>))
+--------------------------------------------------------------------------------
 
-
---------------------------------------------------------------------------------     
-        
 syntaxHighlightingStyle :: Style
 syntaxHighlightingStyle = pygments
 
@@ -24,7 +23,9 @@ config = defaultConfiguration
 
 main :: IO ()
 main = do 
-    -- Generate css stytling for code highlighting
+    ------------------------------------
+    -- Generate code for CSS styling ---
+    ------------------------------------
     let css = styleToCss syntaxHighlightingStyle
     writeFile  ("css" </> "syntax.css") css >> putStrLn " Generated css/syntax.css"
     appendFile ("css" </> "syntax.css") "div.sourceCode { padding: 0.75em 0 0.75em 0; }" >> putStrLn " Updated padding for css/syntax.css"
@@ -33,36 +34,35 @@ main = do
         >> putStrLn " Added border to css/syntax.css"
 
     hakyllWith config $ do 
+        ------------------
+        --- Copy files ---
+        ------------------
         match "chicago.csl" $ do 
             route idRoute
             compile cslCompiler
-    
+         
         match "refs.bib" $ do 
             route idRoute
             compile biblioCompiler
-
+        
         match "google9b53f6c193ef33e6.html" $ do
             route   idRoute
             compile copyFileCompiler
-
+        
         match "images/*" $ do
             route   idRoute
             compile copyFileCompiler
-
+        
         match "fonts/**/*" $ do
             route   idRoute
             compile copyFileCompiler
-
+        
         match "css/*" $ do
             route   idRoute
             compile compressCssCompiler
-     
-        --match (fromList ["about.rst", "contact.markdown"]) $ do
-        --    route   $ setExtension "html"
-        --    compile $ pandocMathCompiler
-        --        >>= loadAndApplyTemplate "templates/about_default.html" defaultContext
-        --        >>= relativizeUrls
-
+        ---------------------------------------
+        --- Compile contact and about pages ---
+        ---------------------------------------
         match "about.rst" $ do
             route   $ setExtension "html"
             compile $ myPandocBiblioCompiler
@@ -74,10 +74,14 @@ main = do
             compile $ myPandocBiblioCompiler
                 >>= loadAndApplyTemplate "templates/contact_base.html" defaultContext
                 >>= relativizeUrls
-        
-        tags <- buildTags "posts/**/*" (fromCapture "tags/*.html")
-        
-        tagsRules tags $ \tag pattern -> do
+        ----------------------------
+        --- Build tags for posts ---
+        ----------------------------
+        --- see: 1). https://javran.github.io/posts/2014-03-01-add-tags-to-your-hakyll-blog.html
+        ---      2). https://github.com/kowainik/kowainik.github.io/blob/e3976e9eb686f6511258b3cea487af59f7c64bd6/templates/post.html
+        postTags <- buildTags "posts/**/*" (fromCapture "tags/posts/*.html") 
+
+        tagsRules postTags $ \tag pattern -> do
             let title = "Posts tagged \"" ++ tag ++ "\""
                 title_link = "<a href='/archive.html'>Posts</a> tagged \"" ++ tag ++ "\""
             route idRoute
@@ -94,8 +98,33 @@ main = do
                 makeItem ""
                         >>= loadAndApplyTemplate "templates/tag.html" ctx
                         >>= loadAndApplyTemplate "templates/default.html" ctx
+                        >>= relativizeUrls
+        ----------------------------
+        --- Build tags for notes ---
+        ----------------------------
+        notesTags <- buildTags "notes/**/*" (fromCapture "tags/notes/*.html") 
+
+        tagsRules notesTags $ \tag pattern -> do
+            let title = "Notes tagged \"" ++ tag ++ "\""
+                title_link = "<a href='/archive.html'>Notes</a> tagged \"" ++ tag ++ "\""
+            route idRoute
+            compile $ do
+                notes <- recentFirst =<< loadAll pattern
+                let ids = map itemIdentifier notes
+                tagsList <- nub . concat <$> traverse getTags ids
+                let ctx = postCtxWithTags tagsList
+                        <> constField "title"      title
+                        <> constField "title_link" title_link
+                        <> listField  "posts" (postCtxWithTags tagsList) (return notes)
+                        <> defaultContext
+                
+                makeItem ""
+                        >>= loadAndApplyTemplate "templates/tag.html" ctx
+                        >>= loadAndApplyTemplate "templates/default.html" ctx
                         >>= relativizeUrls 
-        
+        ---------------------
+        --- Compile posts ---
+        ---------------------
         match "posts/**/*" $ do
             route $ setExtension "html"
             compile $ do
@@ -105,14 +134,25 @@ main = do
                 loadAndApplyTemplate "templates/post.html" postTagsCtx i
                     >>= loadAndApplyTemplate "templates/post_base.html" postTagsCtx
                     >>= relativizeUrls
-        
+        ---------------------
+        --- Compile notes ---
+        ---------------------
+        match "notes/**/*" $ do
+            route $ setExtension "html"
+            compile $ do 
+                i   <- myPandocBiblioCompiler
+                tgs <- getTags (itemIdentifier i)
+                let postTagsCtx = postCtxWithTags tgs
+                loadAndApplyTemplate "templates/post.html" postTagsCtx i
+                    >>= loadAndApplyTemplate "templates/post_base.html" postTagsCtx
+                    >>= relativizeUrls
+        -----------------------
+        --- Compile archive ---
+        -----------------------
+        --- see: https://github.com/kowainik/kowainik.github.io/blob/e3976e9eb686f6511258b3cea487af59f7c64bd6/templates/post.html
         create ["archive.html"] $ do
             route idRoute
             compile $ do
-                --allPosts <- recentFirst =<< loadAll "posts/**/*"
-                --let allIds = map itemIdentifier allPosts
-                --allTags <- nub . concat <$> traverse getTags allIds
-
                 engPosts <- recentFirst =<< loadAll "posts/eng/*"
                 let engIds = map itemIdentifier engPosts
                 engTags <- nub . concat <$> traverse getTags engIds
@@ -124,28 +164,58 @@ main = do
                 miscPosts <- recentFirst =<< loadAll "posts/misc/*" 
                 let miscIds = map itemIdentifier miscPosts
                 miscTags <- nub . concat <$> traverse getTags miscIds
-                               
-                --allTags <- nub . concat <$> traverse getTags (engIds <> mathIds <> miscIds)
                 
-                --let archiveCtx = postCtxWithTags (engTags <> mathTags <> miscTags)
-                let archiveCtx = 
-                           listField  "tagsList"  (field "tag" $ pure . itemBody) (traverse makeItem (engTags <> mathTags <> miscTags))
-                        <> listField  "engPosts"  (postCtxWithTags engTags)  (return engPosts)
-                        <> listField  "mathPosts" (postCtxWithTags mathTags) (return mathPosts)
-                        <> listField  "miscPosts" (postCtxWithTags miscTags) (return miscPosts)
-                        <> constField "title"     "Archives"
-                        <> defaultContext
+                let archiveCtx =
+                            listField  "tagsList"  (field "tag" $ pure . itemBody) (traverse makeItem (engTags <> mathTags <> miscTags))
+                        <>  listField  "engPosts"  (postCtxWithTags engTags)  (return engPosts)
+                        <>  listField  "mathPosts" (postCtxWithTags mathTags) (return mathPosts)
+                        <>  listField  "miscPosts" (postCtxWithTags miscTags) (return miscPosts)
+                        <>  constField "title"     "Archives"
+                        <>  defaultContext
                 makeItem ""
-                    >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+                    >>= loadAndApplyTemplate "templates/archive.html"      archiveCtx
                     >>= loadAndApplyTemplate "templates/archive_base.html" archiveCtx
                     >>= relativizeUrls
-        
-        
-        --create ["archive.html"] $ compileArchive "Archive" "posts/**/*"
-        
-        -- DEFAULT TEST RUN (WORKS)
-        --create ["archive.html"] $ compilePosts "Archive" "templates/archive.html" "posts/**/*" 
-
+        -----------------------------
+        --- Compile notes archives ---
+        -----------------------------
+        --- Books --- 
+        create ["bookNotes.html"] $ do
+            route idRoute
+            compile $ do
+                bookNotes <- recentFirst =<< loadAll "notes/book/*"
+                let bookIds = map itemIdentifier bookNotes
+                bookTags <- nub . concat <$> traverse getTags bookIds
+                let bookCtx =
+                            listField  "tagsList"   (field "tag" $ pure . itemBody) (traverse makeItem bookTags)
+                        <>  listField  "posts"      (postCtxWithTags bookTags) (return bookNotes)
+                        <>  constField "title"      "Book Notes"
+                        <>  constField "title_link" "Book <a href='archive.html'>Notes</a>"
+                        <>  defaultContext
+                makeItem ""
+                    >>= loadAndApplyTemplate "templates/notes.html"      bookCtx
+                    >>= loadAndApplyTemplate "templates/notes_base.html" bookCtx
+                    >>= relativizeUrls
+        --- Research ---
+        create ["researchNotes.html"] $ do
+            route idRoute
+            compile $ do
+                researchNotes <- recentFirst =<< loadAll "notes/research/*"
+                let researchIds = map itemIdentifier researchNotes
+                researchTags <- nub . concat <$> traverse getTags researchIds
+                let researchCtx =
+                            listField  "tagsList"   (field "tag" $ pure . itemBody) (traverse makeItem researchTags)
+                        <>  listField  "posts"      (postCtxWithTags researchTags) (return researchNotes)
+                        <>  constField "title"      "Research Journal"
+                        <>  constField "title_link" "Research <a href='archive.html'>Journal</a>"
+                        <>  defaultContext
+                makeItem ""
+                    >>= loadAndApplyTemplate "templates/notes.html"      researchCtx
+                    >>= loadAndApplyTemplate "templates/notes_base.html" researchCtx
+                    >>= relativizeUrls
+        --------------------------
+        --- Compile index page ---
+        --------------------------
         match "index.html" $ do
             route idRoute
             compile $ do
@@ -159,72 +229,26 @@ main = do
                     >>= applyAsTemplate indexCtx
                     >>= loadAndApplyTemplate "templates/index.html" indexCtx
                     >>= relativizeUrls
-
+        ----------------------
+        --- Copy templates ---
+        ----------------------
         match "templates/*" $ compile templateCompiler
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------
+--- Extra contexts (Collections of template $variables$) ---
+------------------------------------------------------------
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
 
+--- See kowainik github ---
 postCtxWithTags :: [String] -> Context String
 postCtxWithTags tags = 
     listField "tagsList" (field "tag" $ pure . itemBody) (traverse makeItem tags)
     <> postCtx
-
-{- Old
-postCtxWithTags :: Tags -> Context String
-postCtxWithTags tags = tagsField "tags" tags `mappend` postCtx
--}
-
--- from github.com/kowainik/kowainik.github.io/
-
-{- DEFAULT TEST RUN (WORKS)
-compilePosts :: String -> Identifier -> Pattern -> Rules ()
-compilePosts title page pat = do
-    route idRoute
-    compile $ do
-        posts <- recentFirst =<< loadAll pat
-        let ids = map itemIdentifier posts
-        tagsList <- nub . concat <$> traverse getTags ids
-        let ctx = postCtxWithTags tagsList
-               <> constField "title" title
-               <> listField "posts" postCtx (return posts)
-               <> defaultContext
-
-        makeItem ""
-            >>= loadAndApplyTemplate page ctx
-            >>= loadAndApplyTemplate "templates/archive_base.html" ctx
-            >>= relativizeUrls
--}
-
-{-
-compileArchive :: String -> Pattern -> Rules ()
-compileArchive title pat = do
-    route idRoute
-    compile $ do
-        allPosts <- recentFirst =<< loadAll pat
-        let allIds = map itemIdentifier allPosts
-        allTags <- nub . concat <$> traverse getTags allIds 
-        postsEng  <- recentFirst =<< loadAll "posts/eng/*"
-        postsMath <- recentFirst =<< loadAll "posts/math/*"
-        postsMisc <- recentFirst =<< loadAll "posts/misc/*" 
-        let archiveCtx =  postCtxWithTags allTags
-                <> listField  "postsEng"  postCtx (return postsEng)
-                <> listField  "postsMath" postCtx (return postsMath)
-                <> listField  "postsMisc" postCtx (return postsMisc)
-                --listField  "tagsList"  (field "tag" $ pure . itemBody) (traverse makeItem allTags) `mappend`
-                <> constField "title"     title
-                <> defaultContext
-
-        makeItem ""
-            >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-            >>= loadAndApplyTemplate "templates/archive_base.html" archiveCtx
-            >>= relativizeUrls
--}
- 
+----------------------------------
+--- Citations helper functions ---
+----------------------------------
 turnOnLinkCitations :: ReaderOptions
                     -> Item String
                     -> Compiler (Item Pandoc)
@@ -238,7 +262,9 @@ addLinkCitations (Pandoc meta a) =
 --     & M.insert "reference-section-title" (MetaString "<u>References</u>")
        & M.insert "link-citations" (MetaBool True)
        & \m -> Pandoc (Meta m) a
-
+-----------------------------------------------------
+--- Custom compiler (extensions, math, citations) ---
+-----------------------------------------------------
 myPandocBiblioCompiler :: Compiler (Item String)
 myPandocBiblioCompiler = do
     let markdownExtensions = 
@@ -273,36 +299,4 @@ myPandocBiblioCompiler = do
         turnOnLinkCitations defaultHakyllReaderOptions >>=
         processPandocBiblio csl bib >>= 
         return . writePandocWith writerOptions
- 
-{-  
-myPandocMathCompiler :: Compiler (Item String)
-myPandocMathCompiler =
-    let 
-    markdownExtensions = 
-        [ Ext_markdown_in_html_blocks 
-        , Ext_bracketed_spans
-        , Ext_citations
-        , Ext_footnotes
-        , Ext_raw_html
-        ]
-    mathExtensions = 
-        [ Ext_tex_math_dollars
-        , Ext_tex_math_double_backslash
-        , Ext_latex_macros 
-        , Ext_raw_tex
-        ]
-    codeExtensions = 
-        [ Ext_fenced_code_blocks
-        , Ext_backtick_code_blocks                      
-        , Ext_fenced_code_attributes 
-        ]
-    defaultExtensions = writerExtensions defaultHakyllWriterOptions  
-    newExtensions = foldr enableExtension defaultExtensions (markdownExtensions <> (mathExtensions <> codeExtensions))
-    writerOptions = 
-        defaultHakyllWriterOptions 
-        { writerExtensions = newExtensions
-        , writerHTMLMathMethod = MathJax ""
-        , writerHighlightStyle = Just syntaxHighlightingStyle 
-        }
-    in pandocCompilerWith defaultHakyllReaderOptions writerOptions
--} 
+

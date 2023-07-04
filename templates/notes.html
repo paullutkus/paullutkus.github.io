@@ -1,0 +1,13 @@
+<div class="row">
+	<div class="two_thirds_col">
+		<h1 style="margin-top:0">$title_link$</h1>
+		$partial("templates/post-list.html")$
+	</div>
+	<div class="notes_right_col">
+		<h4 style="font-weight:normal;display:inline"><i>Tags:</i></h4>
+		$for(tagsList)$
+			<a style="font-size:0.75em;font-style:italic" href="tags/notes/$tag$.html">$tag$</a>$sep$,
+		$endfor$
+	</div>
+</div>
+

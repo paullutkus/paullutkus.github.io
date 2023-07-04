@@ -85,4 +85,10 @@
         div.info {
             font-size: 40px;
         }
+		.notes_right_col {
+			margin-top: 0.5%;
+		}
+		.archive_tags_col {
+			margin-top: 0%;
+		}
 }
