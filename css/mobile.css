@@ -70,20 +70,25 @@
         }
 		.flex-item-side {
             width: 2.3%;
+			padding-top:3.72em;
         }
         .flex-item-main {
             width: 92%;
             margin-left: 0;
         }
+		.back {
+			margin-top:-3.72em;
+		}
         .back img {
             padding-left: 1.5em;
         }
         .back .caption {
             padding-bottom: 3.3em;
             padding-left: 1em;
-        }
+		}
         div.info {
             font-size: 40px;
+			margin-top: -0.60em;
         }
 		.notes_right_col {
 			margin-top: 0.5%;
