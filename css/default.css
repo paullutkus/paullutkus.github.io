@@ -90,7 +90,8 @@ div#header {
             color: #555;
             font-size: 19.125px;
             margin-top: 42px;
-            padding: 15px 0 15px 0;
+            /*padding: 15px 0 15px 0;*/
+			padding: 10px 0 15px 0;
             text-align: right;
         }
         h1 {
@@ -155,7 +156,8 @@ div#header {
             color: #555;
             font-size: 13.5px;
             margin-top: 30px;
-            padding: 12px 0 12px 0;
+            /*padding: 12px 0 12px 0;*/
+			padding: 8px 0 12px 0;
             text-align: right;
         }
         h1 {

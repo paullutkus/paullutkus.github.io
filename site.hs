@@ -143,7 +143,7 @@ main = do
                 i   <- myPandocBiblioCompiler
                 tgs <- getTags (itemIdentifier i)
                 let postTagsCtx = postCtxWithTags tgs
-                loadAndApplyTemplate "templates/post.html" postTagsCtx i
+                loadAndApplyTemplate "templates/note.html" postTagsCtx i
                     >>= loadAndApplyTemplate "templates/post_base.html" postTagsCtx
                     >>= relativizeUrls
         -----------------------
@@ -193,7 +193,7 @@ main = do
                         <>  constField "title_link" "Book <a href='archive.html'>Notes</a>"
                         <>  defaultContext
                 makeItem ""
-                    >>= loadAndApplyTemplate "templates/notes.html"      bookCtx
+                    >>= loadAndApplyTemplate "templates/notes-list.html"      bookCtx
                     >>= loadAndApplyTemplate "templates/notes_base.html" bookCtx
                     >>= relativizeUrls
         --- Research ---
@@ -210,7 +210,7 @@ main = do
                         <>  constField "title_link" "Research <a href='archive.html'>Journal</a>"
                         <>  defaultContext
                 makeItem ""
-                    >>= loadAndApplyTemplate "templates/notes.html"      researchCtx
+                    >>= loadAndApplyTemplate "templates/notes-list.html"      researchCtx
                     >>= loadAndApplyTemplate "templates/notes_base.html" researchCtx
                     >>= relativizeUrls
         --------------------------
