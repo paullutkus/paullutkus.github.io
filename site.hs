@@ -1,7 +1,9 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-
+{-# LANGUAGE TupleSections #-}
 import           Data.Monoid (mappend)
+import           Control.Monad.Fail (MonadFail)
+import           Control.Monad (liftM)
 import           Hakyll
 import           Text.Pandoc as Pandoc
 import           Text.Pandoc.Extensions
@@ -9,6 +11,8 @@ import           Text.Pandoc.Options
 import           Text.Pandoc.Highlighting
 import qualified Data.Map as M
 import           Data.List
+import           Data.Ord (comparing)
+import           Data.Time.Locale.Compat (defaultTimeLocale)
 import           Data.Function                   ((&))
 import           System.FilePath                 ((</>))
 --------------------------------------------------------------------------------
@@ -183,7 +187,7 @@ main = do
         create ["bookNotes.html"] $ do
             route idRoute
             compile $ do
-                bookNotes <- recentFirst =<< loadAll "notes/book/*"
+                bookNotes <- lastModifiedFirst =<< loadAll "notes/book/*"
                 let bookIds = map itemIdentifier bookNotes
                 bookTags <- nub . concat <$> traverse getTags bookIds
                 let bookCtx =
@@ -193,14 +197,14 @@ main = do
                         <>  constField "title_link" "Book <a href='archive.html'>Notes</a>"
                         <>  defaultContext
                 makeItem ""
-                    >>= loadAndApplyTemplate "templates/notes-list.html"      bookCtx
+                    >>= loadAndApplyTemplate "templates/notes-list.html" bookCtx
                     >>= loadAndApplyTemplate "templates/notes_base.html" bookCtx
                     >>= relativizeUrls
         --- Research ---
         create ["researchNotes.html"] $ do
             route idRoute
             compile $ do
-                researchNotes <- recentFirst =<< loadAll "notes/research/*"
+                researchNotes <- lastModifiedFirst =<< loadAll "notes/research/*"
                 let researchIds = map itemIdentifier researchNotes
                 researchTags <- nub . concat <$> traverse getTags researchIds
                 let researchCtx =
@@ -210,7 +214,7 @@ main = do
                         <>  constField "title_link" "Research <a href='archive.html'>Journal</a>"
                         <>  defaultContext
                 makeItem ""
-                    >>= loadAndApplyTemplate "templates/notes-list.html"      researchCtx
+                    >>= loadAndApplyTemplate "templates/notes-list.html" researchCtx
                     >>= loadAndApplyTemplate "templates/notes_base.html" researchCtx
                     >>= relativizeUrls
         --------------------------
@@ -262,6 +266,25 @@ addLinkCitations (Pandoc meta a) =
 --     & M.insert "reference-section-title" (MetaString "<u>References</u>")
        & M.insert "link-citations" (MetaBool True)
        & \m -> Pandoc (Meta m) a
+-----------------------------
+--- Get modification date ---
+-----------------------------
+modificationDate
+
+-----------------------------
+--- Sort by last-modified ---
+-----------------------------
+--- first modified to last --- 
+-- FIX THIS: chronologicalByModification :: (MonadMetadata m, MonadFail m) => [Item a] -> m [Item a] ---
+chronologicalByModification =
+        sortByM $ getItemModificationTime . itemIdentifier
+    where
+        sortByM :: (Monad m, Ord  k) => (a -> m k) -> [a] -> m [a]
+        sortByM f xs = liftM (map fst . sortBy (comparing snd)) $
+                       mapM (\x -> liftM (x,) (f x)) xs
+--- Return last modified file first ---
+-- FIX THIS: lastModifiedFirst :: (MonadMetadata m, MonadFail m) => [Item a] -> m [Item a] ---
+lastModifiedFirst = liftM reverse . chronologicalByModification
 -----------------------------------------------------
 --- Custom compiler (extensions, math, citations) ---
 -----------------------------------------------------

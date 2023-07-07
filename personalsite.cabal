@@ -21,7 +21,8 @@ executable personalsite
                        hakyll,
                        pandoc,
                        filepath,
-                       containers
+                       containers,
+                       time-locale-compat
   ghc-options:         -Wall
                        -Wcompat
                        -Widentities
