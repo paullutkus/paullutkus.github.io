@@ -92,7 +92,7 @@ main = do
             compile $ do
                 posts <- lastModifiedFirst =<< loadAll pattern
                 let ids = map itemIdentifier posts
-                tagsList <- nub . concat <$> traverse getTags ids
+                tagsList <- sort . nub . concat <$> traverse getTags ids
                 let ctx = postCtxWithTags tagsList
                         <> constField "title"      title
                         <> constField "title_link" title_link
@@ -115,7 +115,7 @@ main = do
             compile $ do
                 notes <- lastModifiedFirst =<< loadAll pattern
                 let ids = map itemIdentifier notes
-                tagsList <- nub . concat <$> traverse getTags ids
+                tagsList <- sort . nub . concat <$> traverse getTags ids
                 let ctx = postCtxWithTags tagsList
                         <> constField "title"      title
                         <> constField "title_link" title_link
@@ -132,8 +132,8 @@ main = do
         match "posts/**/*" $ do
             route $ setExtension "html"
             compile $ do
-                i                <- myPandocBiblioCompiler
-                tgs              <- getTags (itemIdentifier i)
+                i   <- myPandocBiblioCompiler
+                tgs <- getTags (itemIdentifier i)
                 let postTagsCtx = postCtxWithTags tgs
                 loadAndApplyTemplate "templates/post.html" postTagsCtx i
                     >>= loadAndApplyTemplate "templates/post_base.html" postTagsCtx
@@ -169,8 +169,9 @@ main = do
                 let miscIds = map itemIdentifier miscPosts
                 miscTags <- nub . concat <$> traverse getTags miscIds
                 
-                let archiveCtx =
-                            listField  "tagsList"  (field "tag" $ pure . itemBody) (traverse makeItem (engTags <> mathTags <> miscTags))
+                let allTags = sort (engTags <> mathTags <> miscTags)
+                let archiveCtx = 
+                            listField  "tagsList"  (field "tag" $ pure . itemBody) (traverse makeItem allTags)
                         <>  listField  "engPosts"  (postCtxWithTags engTags)  (return engPosts)
                         <>  listField  "mathPosts" (postCtxWithTags mathTags) (return mathPosts)
                         <>  listField  "miscPosts" (postCtxWithTags miscTags) (return miscPosts)
@@ -189,7 +190,7 @@ main = do
             compile $ do
                 bookNotes <- lastModifiedFirst =<< loadAll "notes/book/*"
                 let bookIds = map itemIdentifier bookNotes
-                bookTags <- nub . concat <$> traverse getTags bookIds
+                bookTags <- sort . nub . concat <$> traverse getTags bookIds
                 let bookCtx =
                             listField  "tagsList"   (field "tag" $ pure . itemBody) (traverse makeItem bookTags)
                         <>  listField  "posts"      (postCtxWithTags bookTags) (return bookNotes)
@@ -206,7 +207,7 @@ main = do
             compile $ do
                 researchNotes <- lastModifiedFirst =<< loadAll "notes/research/*"
                 let researchIds = map itemIdentifier researchNotes
-                researchTags <- nub . concat <$> traverse getTags researchIds
+                researchTags <- sort . nub . concat <$> traverse getTags researchIds
                 let researchCtx =
                             listField  "tagsList"   (field "tag" $ pure . itemBody) (traverse makeItem researchTags)
                         <>  listField  "posts"      (postCtxWithTags researchTags) (return researchNotes)
