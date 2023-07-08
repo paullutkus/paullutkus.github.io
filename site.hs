@@ -90,7 +90,7 @@ main = do
                 title_link = "<a href='/archive.html'>Posts</a> tagged \"" ++ tag ++ "\""
             route idRoute
             compile $ do
-                posts <- recentFirst =<< loadAll pattern
+                posts <- lastModifiedFirst =<< loadAll pattern
                 let ids = map itemIdentifier posts
                 tagsList <- nub . concat <$> traverse getTags ids
                 let ctx = postCtxWithTags tagsList
@@ -113,7 +113,7 @@ main = do
                 title_link = "<a href='/archive.html'>Notes</a> tagged \"" ++ tag ++ "\""
             route idRoute
             compile $ do
-                notes <- recentFirst =<< loadAll pattern
+                notes <- lastModifiedFirst =<< loadAll pattern
                 let ids = map itemIdentifier notes
                 tagsList <- nub . concat <$> traverse getTags ids
                 let ctx = postCtxWithTags tagsList
@@ -132,8 +132,8 @@ main = do
         match "posts/**/*" $ do
             route $ setExtension "html"
             compile $ do
-                i   <- myPandocBiblioCompiler
-                tgs <- getTags (itemIdentifier i)
+                i                <- myPandocBiblioCompiler
+                tgs              <- getTags (itemIdentifier i)
                 let postTagsCtx = postCtxWithTags tgs
                 loadAndApplyTemplate "templates/post.html" postTagsCtx i
                     >>= loadAndApplyTemplate "templates/post_base.html" postTagsCtx
@@ -157,15 +157,15 @@ main = do
         create ["archive.html"] $ do
             route idRoute
             compile $ do
-                engPosts <- recentFirst =<< loadAll "posts/eng/*"
+                engPosts <- lastModifiedFirst =<< loadAll "posts/eng/*"
                 let engIds = map itemIdentifier engPosts
                 engTags <- nub . concat <$> traverse getTags engIds
                 
-                mathPosts <- recentFirst =<< loadAll "posts/math/*"
+                mathPosts <- lastModifiedFirst =<< loadAll "posts/math/*"
                 let mathIds = map itemIdentifier mathPosts
                 mathTags <- nub . concat <$> traverse getTags mathIds
                 
-                miscPosts <- recentFirst =<< loadAll "posts/misc/*" 
+                miscPosts <- lastModifiedFirst =<< loadAll "posts/misc/*" 
                 let miscIds = map itemIdentifier miscPosts
                 miscTags <- nub . concat <$> traverse getTags miscIds
                 
@@ -223,7 +223,7 @@ main = do
         match "index.html" $ do
             route idRoute
             compile $ do
-                posts <- recentFirst =<< loadAll "posts/**/*"
+                posts <- lastModifiedFirst =<< loadAll "posts/**/*"
                 let indexCtx =
                         listField "posts" postCtx (return posts) `mappend`
                         constField "title" "Home"                `mappend`
@@ -242,7 +242,8 @@ main = do
 ------------------------------------------------------------
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
+    dateField "date" "%B %e, %Y"                `mappend`
+    modificationTimeField "modDate" "%B %e, %Y" `mappend`
     defaultContext
 
 --- See kowainik github ---
@@ -266,11 +267,6 @@ addLinkCitations (Pandoc meta a) =
 --     & M.insert "reference-section-title" (MetaString "<u>References</u>")
        & M.insert "link-citations" (MetaBool True)
        & \m -> Pandoc (Meta m) a
------------------------------
---- Get modification date ---
------------------------------
-modificationDate
-
 -----------------------------
 --- Sort by last-modified ---
 -----------------------------
