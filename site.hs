@@ -291,6 +291,8 @@ lastModifiedFirst = liftM reverse . chronologicalByModification
 -----------------------------------------------------
 myPandocBiblioCompiler :: Compiler (Item String)
 myPandocBiblioCompiler = do
+    underlying <- getUnderlying
+    toc        <- getMetadataField underlying "tableOfContents"
     let markdownExtensions = 
             [ Ext_markdown_in_html_blocks 
             , Ext_bracketed_spans
@@ -311,23 +313,28 @@ myPandocBiblioCompiler = do
             ]
         defaultExtensions = writerExtensions defaultHakyllWriterOptions  
         newExtensions = foldr enableExtension defaultExtensions (markdownExtensions <> (mathExtensions <> codeExtensions))
-        writerOptions = 
-            defaultHakyllWriterOptions 
+        writerOptions' = 
+            defaultHakyllWriterOptions
             { writerExtensions = newExtensions
             , writerHTMLMathMethod = MathJax ""
             , writerHighlightStyle = Just syntaxHighlightingStyle
-            --- Table of contents ---
-            , writerNumberSections  = True
-            , writerTableOfContents = True
-            , writerTOCDepth        = 3
-            , writerTemplate        = Just tocTemplate
             }
+        writerOptions = maybe 
+            writerOptions'
+            (const $ withToc writerOptions') toc
     csl <- load "chicago.csl"
     bib <- load "refs.bib" 
     getResourceBody >>= 
         turnOnLinkCitations defaultHakyllReaderOptions >>=
         processPandocBiblio csl bib >>= 
         return . writePandocWith writerOptions
+
+withToc :: WriterOptions -> WriterOptions
+withToc options = options { writerNumberSections  = True
+                          , writerTableOfContents = True
+                          , writerTOCDepth        = 2
+                          , writerTemplate        = Just tocTemplate
+                          }
 
 tocTemplate :: Pandoc.Template Text
 tocTemplate = either error id . runIdentity . compileTemplate "" $ T.unlines

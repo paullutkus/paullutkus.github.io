@@ -1,11 +1,10 @@
 ---
 title: Boundary Point Detection Algorithms
 tags: Geometry
+tableOfContents: true
 ---
 
-# Test
-
-## [Introduction]{.underline} ##
+# [Introduction]{.underline} #
 
 My current project involves sampling a set of points on which I'll learn a 
 control barrier function. I need to automate the detection of boundary
@@ -15,7 +14,7 @@ could solve this problem.
 \
 \
 
-## [Alpha Shape]{.underline} ##
+# [Alpha Shape]{.underline} #
 
 The concept of an 'alpha shape' is a nonconvex generalization of the convex 
 hull. Most theorems and proofs regarding the alpha shape of a set of points
@@ -24,7 +23,7 @@ necessitate placing the points in 'general position'.
 
 <section class="indent">
 
-### General Position ###
+## General Position ##
 
 Considering points that are in general position is a way to avoiding edge 
 cases when constructing proofs and programs. In $n$-dimensional space, general
@@ -35,7 +34,7 @@ position is the
 \
 \
 
-## [Convex Hull]{.underline} ##
+# [Convex Hull]{.underline} #
 
 I've decided to use the 'Gift Wrapping' algorithm to compute the convex hull
 since it generalizes nicely to computing the alpha shape as I'll explain.
@@ -68,7 +67,7 @@ number of hull points.
 
 <section class="indent">
 
-### The Initial Maximum ###
+## The Initial Maximum ##
 
 As in &nbsp;<b>`step 1`</b>&nbsp;, &nbsp; we first find the point that 
 is maximal in the $y$-dimension. Given a datasent of shape $(n,2)$, We'll 
@@ -85,7 +84,7 @@ for idx, x in enumerate(pts[1:]):
 	pts_copy.append(x)	
 ```
 
-### The Central Loop ###
+## The Central Loop ##
 
 This section covers &nbsp;<b>`step 3`</b>&nbsp; and &nbsp;<b>`step 4`</b>&nbsp; 
 and is primarily a do-while-loop that checks whether each new focus is the 
@@ -149,7 +148,7 @@ while True:
 		break 	
 ```
 
-### Tracking Affine Transformations ###
+## Tracking Affine Transformations ##
 
 We next regard &nbsp;<b>`step 5`</b>&nbsp; and consider how the dataset must be
 rotated between iterations to ensure that the minimum nonnegative slope 

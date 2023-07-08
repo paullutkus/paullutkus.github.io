@@ -4,7 +4,7 @@ link-citations: true
 tags: Machine Learning
 ---
 
-## [Introduction]{.underline} ##
+# [Introduction]{.underline} #
 
 In this post, I'll review Meta AI's new, self-supervised learning 
 architecture [@AssranJEPA2023], centered around the idea of multi-modal 
@@ -15,14 +15,14 @@ Footnote test [^1]
 
 <section class="indent">
 
-### Motivation ###
+## Motivation ##
 
 The authors draw attention to implicit biases in data augmentation.
 
 </section> 
 \
 
-## [References]{.underline} ##
+# [References]{.underline} #
 
 [^1]: Here's an example footnote &nbsp;
 

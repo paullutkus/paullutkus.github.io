@@ -98,12 +98,9 @@ div#header {
             font-size: 38.25px;
         }
         h2 {
-            font-size: 38.25px;
-        }
-        h3 {
             font-size: 30.813px;
         }
-        h4 {
+        h3 {
             font-size: 27.648px;
         }
         div.sourceCode {
@@ -162,14 +159,11 @@ div#header {
         }
         h1 {
             font-size: 27px;
-        }
-        h2 {
-            font-size: 27px;
         }  
-        h3 {
+        h2 {
             font-size: 22.3264px;
         }
-        h4 {
+        h3 {
             font-size: 20.08px;
         }
         div.sourceCode {
@@ -197,6 +191,4 @@ div#header {
     body h3 {
         font-family: "EB-Garamond-SemiBold";
     }
-    body h4 {
-        font-family: "EB-Garamond-SemiBold";
-    }
+}
