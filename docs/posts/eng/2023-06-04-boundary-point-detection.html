@@ -50,13 +50,32 @@
 	
 	<!--Posted on June  4, 2023-->
 	<!--<br>-->
-	Last updated: July  3, 2023
+	Last updated: July  8, 2023
 	<br>
 	Tags: 
 	
 		<a href="../../tags/posts/Geometry.html">Geometry</a>
 </div>
-<h2 id="introduction"><u>Introduction</u></h2>
+<div class="toc"><div class="header">Table of Contents</div>
+<ul>
+<li><a href="#test" id="toc-test"><span class="toc-section-number">1</span> Test</a>
+<ul>
+<li><a href="#introduction" id="toc-introduction"><span class="toc-section-number">1.1</span> <u>Introduction</u></a></li>
+<li><a href="#alpha-shape" id="toc-alpha-shape"><span class="toc-section-number">1.2</span> <u>Alpha Shape</u></a>
+<ul>
+<li><a href="#general-position" id="toc-general-position"><span class="toc-section-number">1.2.1</span> General Position</a></li>
+</ul></li>
+<li><a href="#convex-hull" id="toc-convex-hull"><span class="toc-section-number">1.3</span> <u>Convex Hull</u></a>
+<ul>
+<li><a href="#the-initial-maximum" id="toc-the-initial-maximum"><span class="toc-section-number">1.3.1</span> The Initial Maximum</a></li>
+<li><a href="#the-central-loop" id="toc-the-central-loop"><span class="toc-section-number">1.3.2</span> The Central Loop</a></li>
+<li><a href="#tracking-affine-transformations" id="toc-tracking-affine-transformations"><span class="toc-section-number">1.3.3</span> Tracking Affine Transformations</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 data-number="1" id="test"><span class="header-section-number">1</span> Test</h1>
+<h2 data-number="1.1" id="introduction"><span class="header-section-number">1.1</span> <u>Introduction</u></h2>
 <p>My current project involves sampling a set of points on which I’ll learn a
 control barrier function. I need to automate the detection of boundary
 points in the sampled set, which is not guaranteed to be convex. I’m using
@@ -64,12 +83,12 @@ this post to document my experimentation with a number of algorithms that
 could solve this problem.<br />
 <br />
 </p>
-<h2 id="alpha-shape"><u>Alpha Shape</u></h2>
+<h2 data-number="1.2" id="alpha-shape"><span class="header-section-number">1.2</span> <u>Alpha Shape</u></h2>
 <p>The concept of an ‘alpha shape’ is a nonconvex generalization of the convex
 hull. Most theorems and proofs regarding the alpha shape of a set of points
 necessitate placing the points in ‘general position’.</p>
 <section class="indent">
-<h3 id="general-position">General Position</h3>
+<h3 data-number="1.2.1" id="general-position"><span class="header-section-number">1.2.1</span> General Position</h3>
 <p>Considering points that are in general position is a way to avoiding edge
 cases when constructing proofs and programs. In <span class="math inline">\(n\)</span>-dimensional space, general
 position is the</p>
@@ -77,7 +96,7 @@ position is the</p>
 <p><br />
 <br />
 </p>
-<h2 id="convex-hull"><u>Convex Hull</u></h2>
+<h2 data-number="1.3" id="convex-hull"><span class="header-section-number">1.3</span> <u>Convex Hull</u></h2>
 <p>I’ve decided to use the ‘Gift Wrapping’ algorithm to compute the convex hull
 since it generalizes nicely to computing the alpha shape as I’ll explain.
 Loosely, the procedure is as follows:</p>
@@ -104,7 +123,7 @@ Loosely, the procedure is as follows:</p>
 points, this procedure has a time-complexity of <span class="math inline">\(O(hn)\)</span>, where <span class="math inline">\(h\)</span> is the
 number of hull points.</p>
 <section class="indent">
-<h3 id="the-initial-maximum">The Initial Maximum</h3>
+<h3 data-number="1.3.1" id="the-initial-maximum"><span class="header-section-number">1.3.1</span> The Initial Maximum</h3>
 <p>As in  <b><code>step 1</code></b> ,   we first find the point that
 is maximal in the <span class="math inline">\(y\)</span>-dimension. Given a datasent of shape <span class="math inline">\((n,2)\)</span>, We’ll
 create a copy of the data to process, and iterate through it to obtain its
@@ -116,7 +135,7 @@ maximum in <span class="math inline">\(y\)</span>.</p>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>	<span class="cf">if</span> x[<span class="dv">1</span>] <span class="op">&gt;</span> pt_max[<span class="dv">1</span>]:</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>		pt_max <span class="op">=</span> x</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>	pts_copy.append(x)	</span></code></pre></div>
-<h3 id="the-central-loop">The Central Loop</h3>
+<h3 data-number="1.3.2" id="the-central-loop"><span class="header-section-number">1.3.2</span> The Central Loop</h3>
 <p>This section covers  <b><code>step 3</code></b>  and  <b><code>step 4</code></b> 
 and is primarily a do-while-loop that checks whether each new focus is the
 original (in which case, we’ve completed the hull). Recall that the new focus
@@ -171,12 +190,13 @@ and is what we’ll discuss next.</p>
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>		<span class="cf">continue</span></span>
 <span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>	<span class="cf">else</span>:</span>
 <span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>		<span class="cf">break</span> 	</span></code></pre></div>
-<h3 id="tracking-affine-transformations">Tracking Affine Transformations</h3>
+<h3 data-number="1.3.3" id="tracking-affine-transformations"><span class="header-section-number">1.3.3</span> Tracking Affine Transformations</h3>
 <p>We next regard  <b><code>step 5</code></b>  and consider how the dataset must be
 rotated between iterations to ensure that the minimum nonnegative slope
 condition is still valid. The code here will be inserted at the point
 marked  <code>### THE REST ###</code>  in the above snippet</p>
 </section>
+
 
 						<div id="footer">
 	View this site's source code <a href="https://github.com/paullutkus/paullutkus.github.io">here</a>.

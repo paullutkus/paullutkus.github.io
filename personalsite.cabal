@@ -22,7 +22,8 @@ executable personalsite
                        pandoc,
                        filepath,
                        containers,
-                       time-locale-compat
+                       time-locale-compat,
+                       text
   ghc-options:         -Wall
                        -Wcompat
                        -Widentities

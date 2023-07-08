@@ -3,6 +3,8 @@ title: Boundary Point Detection Algorithms
 tags: Geometry
 ---
 
+# Test
+
 ## [Introduction]{.underline} ##
 
 My current project involves sampling a set of points on which I'll learn a 

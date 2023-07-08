@@ -9,8 +9,12 @@ import           Text.Pandoc as Pandoc
 import           Text.Pandoc.Extensions
 import           Text.Pandoc.Options
 import           Text.Pandoc.Highlighting
+import           Text.Pandoc.Templates (compileTemplate) 
 import qualified Data.Map as M
 import           Data.List
+import           Data.Text (Text)
+import qualified Data.Text as T
+import           Data.Functor.Identity (runIdentity)
 import           Data.Ord (comparing)
 import           Data.Time.Locale.Compat (defaultTimeLocale)
 import           Data.Function                   ((&))
@@ -302,8 +306,8 @@ myPandocBiblioCompiler = do
             ]
         codeExtensions = 
             [ Ext_fenced_code_blocks
-            , Ext_backtick_code_blocks                      
-            , Ext_fenced_code_attributes 
+            , Ext_backtick_code_blocks
+            , Ext_fenced_code_attributes
             ]
         defaultExtensions = writerExtensions defaultHakyllWriterOptions  
         newExtensions = foldr enableExtension defaultExtensions (markdownExtensions <> (mathExtensions <> codeExtensions))
@@ -311,7 +315,12 @@ myPandocBiblioCompiler = do
             defaultHakyllWriterOptions 
             { writerExtensions = newExtensions
             , writerHTMLMathMethod = MathJax ""
-            , writerHighlightStyle = Just syntaxHighlightingStyle 
+            , writerHighlightStyle = Just syntaxHighlightingStyle
+            --- Table of contents ---
+            , writerNumberSections  = True
+            , writerTableOfContents = True
+            , writerTOCDepth        = 3
+            , writerTemplate        = Just tocTemplate
             }
     csl <- load "chicago.csl"
     bib <- load "refs.bib" 
@@ -320,3 +329,10 @@ myPandocBiblioCompiler = do
         processPandocBiblio csl bib >>= 
         return . writePandocWith writerOptions
 
+tocTemplate :: Pandoc.Template Text
+tocTemplate = either error id . runIdentity . compileTemplate "" $ T.unlines
+    [ "<div class=\"toc\"><div class=\"header\">Table of Contents</div>"
+    , "$toc$"
+    , "</div>"
+    , "$body$"
+    ]
