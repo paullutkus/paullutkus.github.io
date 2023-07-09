@@ -27,20 +27,20 @@ div.info {
     height: 100%;
 }
 .flex-body {
-	font-size:0;
+    font-size:0;
 }
 .flex-body-more {
-	float: left;
-	clear: left;
-	width: 100%
+    float: left;
+    clear: left;
+    width: 100%
 }
 .h-full {  height: 100% }
 .w-full {  width: 100% }
 /* equivalent to inner-wrapper
  * in https://stackoverflow.com/questions/39196841/flexbox-align-item-to-specified-baseline */
 .baseline {
-	display: inline-block;
-	text-align: left;
+    display: inline-block;
+    text-align: left;
 }
 .flex-img {
     justify-content: center;
@@ -53,8 +53,8 @@ div.info {
 .back {
     font-style: italic;
     text-align: center;
-	padding-top:0.20em;
-	z-index: 999;
+    padding-top:0.20em;
+    z-index: 999;
 }
 .back img {
     object-fit: contain;
@@ -79,8 +79,8 @@ body h2 {
     margin-bottom: 0.5em; 
 }
 div.sourceCode {
-	tab-size: 4;
+    tab-size: 4;
 }
 code {
-	tab-size: 4;
+    tab-size: 4;
 }

@@ -55,7 +55,7 @@
             font-size: 50.587px;
         }
         div.sourceCode {
-			padding: 0.75em 0 0.75em 0;
+            padding: 0.75em 0 0.75em 0;
             margin-left: -1.5em;
             font-size: 32px;
             tab-size: 2;
@@ -63,34 +63,38 @@
         code {
             /*margin-left: -1em;*/
             font-size: 32px;
-			tab-size: 2;
+            tab-size: 2;
         }
-		.flex-item-side {
+        .flex-item-side {
             width: 2.3%;
-			padding-top:3.72em;
+            padding-top:3.72em;
         }
         .flex-item-main {
             width: 92%;
             margin-left: 0;
         }
-		.back {
-			margin-top:-3.72em;
-		}
+        .back {
+            margin-top:-3.72em;
+        }
         .back img {
             padding-left: 1.5em;
         }
         .back .caption {
             padding-bottom: 3.3em;
             padding-left: 1em;
-		}
+        }
         div.info {
             font-size: 40px;
-			margin-top: -0.60em;
+            margin-top: -0.60em;
         }
-		.notes_right_col {
-			margin-top: 0.5%;
-		}
-		.archive_tags_col {
-			margin-top: 0%;
-		}
+        .notes_right_col {
+            margin-top: 0.5%;
+        }
+        .archive_tags_col {
+            margin-top: 0%;
+        }
+        .toc {
+            border-top: 6px dotted black;
+            border-bottom: 6px dotted black;
+        }
 }

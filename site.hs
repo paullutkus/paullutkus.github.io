@@ -20,15 +20,20 @@ import           Data.Time.Locale.Compat (defaultTimeLocale)
 import           Data.Function                   ((&))
 import           System.FilePath                 ((</>))
 --------------------------------------------------------------------------------
-
+--- Code highlighting ---
+-------------------------
 syntaxHighlightingStyle :: Style
 syntaxHighlightingStyle = pygments
-
+-----------------------
+--- Output location ---
+-----------------------
 config :: Configuration
 config = defaultConfiguration
     { destinationDirectory = "docs"
     }
-
+------------------------------------
+--- All compilation happens here ---
+------------------------------------
 main :: IO ()
 main = do 
     ------------------------------------
@@ -40,31 +45,33 @@ main = do
     appendFile ("css" </> "syntax.css") "div.sourceCode { overflow: visible; }" >> putStrLn " Updated overflow for css/syntax.css"
     appendFile ("css" </> "syntax.css") "div.sourceCode { border-top: 0.18em dotted black; border-bottom: 0.18em dotted black }" 
         >> putStrLn " Added border to css/syntax.css"
-
+    --------------------------------
+    --- Construct and copy files ---
+    --------------------------------
     hakyllWith config $ do 
         ------------------
         --- Copy files ---
         ------------------
         match "chicago.csl" $ do 
             route idRoute
-            compile cslCompiler
-         
+            compile cslCompiler 
+
         match "refs.bib" $ do 
             route idRoute
-            compile biblioCompiler
-        
+            compile biblioCompiler 
+
         match "google9b53f6c193ef33e6.html" $ do
             route   idRoute
-            compile copyFileCompiler
-        
+            compile copyFileCompiler 
+
         match "images/*" $ do
             route   idRoute
-            compile copyFileCompiler
-        
+            compile copyFileCompiler 
+
         match "fonts/**/*" $ do
             route   idRoute
-            compile copyFileCompiler
-        
+            compile copyFileCompiler 
+
         match "css/*" $ do
             route   idRoute
             compile compressCssCompiler
@@ -75,8 +82,8 @@ main = do
             route   $ setExtension "html"
             compile $ myPandocBiblioCompiler
                 >>= loadAndApplyTemplate "templates/about_base.html" defaultContext
-                >>= relativizeUrls
-        
+                >>= relativizeUrls 
+
         match "contact.markdown" $ do
             route   $ setExtension "html"
             compile $ myPandocBiblioCompiler
@@ -101,8 +108,7 @@ main = do
                         <> constField "title"      title
                         <> constField "title_link" title_link
                         <> listField  "posts" (postCtxWithTags tagsList) (return posts)
-                        <> defaultContext
-                
+                        <> defaultContext 
                 makeItem ""
                         >>= loadAndApplyTemplate "templates/tag.html" ctx
                         >>= loadAndApplyTemplate "templates/default.html" ctx
@@ -124,8 +130,7 @@ main = do
                         <> constField "title"      title
                         <> constField "title_link" title_link
                         <> listField  "posts" (postCtxWithTags tagsList) (return notes)
-                        <> defaultContext
-                
+                        <> defaultContext 
                 makeItem ""
                         >>= loadAndApplyTemplate "templates/tag.html" ctx
                         >>= loadAndApplyTemplate "templates/default.html" ctx
@@ -233,7 +238,6 @@ main = do
                         listField "posts" postCtx (return posts) `mappend`
                         constField "title" "Home"                `mappend`
                         defaultContext
-
                 getResourceBody
                     >>= applyAsTemplate indexCtx
                     >>= loadAndApplyTemplate "templates/index.html" indexCtx
@@ -328,7 +332,10 @@ myPandocBiblioCompiler = do
         turnOnLinkCitations defaultHakyllReaderOptions >>=
         processPandocBiblio csl bib >>= 
         return . writePandocWith writerOptions
-
+-------------------------
+--- Table of contents ---
+-------------------------
+--- see: https://svejcar.dev/posts/2019/11/27/table-of-contents-in-hakyll/
 withToc :: WriterOptions -> WriterOptions
 withToc options = options { writerNumberSections  = True
                           , writerTableOfContents = True
@@ -338,8 +345,11 @@ withToc options = options { writerNumberSections  = True
 
 tocTemplate :: Pandoc.Template Text
 tocTemplate = either error id . runIdentity . compileTemplate "" $ T.unlines
-    [ "<div class=\"toc\"><div class=\"header\">Table of Contents</div>"
+    [ "<br>" 
+    , "<div class=\"toc\"><h3>Table of Contents</h3>"
     , "$toc$"
     , "</div>"
+    , "<br>"
+    , "<br>"
     , "$body$"
     ]

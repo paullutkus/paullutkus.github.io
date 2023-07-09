@@ -1,42 +1,42 @@
 .one_third_col {
-	float: left;
-	width: 33.33%;
+    float: left;
+    width: 33.33%;
 }
 .notes_right_col {
-	float: left;
-	width: 33.33%;
-	margin-top: 1.2%
+    float: left;
+    width: 33.33%;
+    margin-top: 1.2%
 }
 .archive_title_col {
-	float: left;
-	width: 50.00%;
-	box-sizing: border-box;
-	padding-right: 10%;
+    float: left;
+    width: 50.00%;
+    box-sizing: border-box;
+    padding-right: 10%;
 }
 .archive_tags_col {
-	float: left;
-	width: 50.00%;
-	margin-top: 1%;
+    float: left;
+    width: 50.00%;
+    margin-top: 1%;
 }
 .half_col {
-	float:left;
-	width: 50.00%
+    float:left;
+    width: 50.00%
 }
 .two_thirds_col {
-	float: left;
-	width: 66.66%;
+    float: left;
+    width: 66.66%;
 }
 .row:after {
-	content: "";
-	display: table;
-	clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 ul {
-	margin-top: 0;
-	padding-left: 0;
-	font-size: 0.88em;
-	list-style: none;
+    margin-top: 0;
+    padding-left: 0;
+    font-size: 0.88em;
+    list-style: none;
 }
 li {
-	margin-bottom: 5%;
+    margin-bottom: 5%;
 }
