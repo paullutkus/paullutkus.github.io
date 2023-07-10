@@ -5,7 +5,7 @@
     <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="google-site-verification" content="_80XeoFjcnfXZI18dveBZq5VBZK4YJKZ2BFax07Is1w" />
-		<title>Paul Lutkus - 2023-04-25-second</title>
+		<title>Paul Lutkus - Largest Convex Subset</title>
 		<link rel="stylesheet" type="text/css" href="../../css/default.css" /> 
 		<link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/post.css" />   
@@ -45,31 +45,36 @@
 						center here
 					</div>
 					<div class="flex-body-more">
-						<h1 style="margin-top:0">2023-04-25-second</h1>
+						<h1 style="margin-top:0">Largest Convex Subset</h1>
 						<div class="info">
 	
-	<!--Posted on April 25, 2023-->
+	<!--Posted on July  9, 2023-->
 	<!--<br>-->
-	Last updated: June  3, 2023
+	Last updated: July 10, 2023
 	<br>
 	Tags: 
 	
+		<a href="../../tags/posts/Geometry.html">Geometry</a>,
+	
+		<a href="../../tags/posts/Convexity.html">Convexity</a>
 </div>
-<h1 id="title">TITLE</h1>
-<h2 id="doesnotbeginwithh">doesnotbeginwithh</h2>
-<h3 id="whah">whah</h3>
-<p>test vs body</p>
-<pre><code>    def func(wow)</code></pre>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">### This is a comment</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> func(x, y):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(x):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">&quot;wow&quot;</span>)</span></code></pre></div>
-<ol type="1">
-<li>bulleted list 1</li>
-<li>two</li>
-<li>3</li>
-</ol>
+<h1 id="introduction"><u>Introduction</u></h1>
+<p>Consider a closed, nonconvex figure in the plane. What is its largest convex
+subset? This does seem like a well founded question, and the problem as a
+whole can be used as a model for exploration as I’ll discuss.</p>
+<figure>
+<img src="../../images/doro.jpg" style="width:40.0%" alt="1: Largest Convex Subset" />
+<figcaption aria-hidden="true"><b>1</b>: Largest Convex Subset</figcaption>
+</figure>
+<p><b>Figure 1</b> illustrates the question at hand. The amoeba shape is
+nonconvex set in question, and the shaded triangle is a guess at the largest
+convex subset. Don’t look to closely though, its easy to pick out ways in which
+the triangle estimation can be improved. For instance, the bottom and left
+sides should be flush with the amoeba, and the right side of the triangle should also be pushed further until it’s flush (<b>Figure 2</b>)</p>
+<figure>
+<img src="../../images/doro_annotated.png" style="width:40.0%" alt="2: Improved Largest Convex Subset" />
+<figcaption aria-hidden="true"><b>2</b>: Improved Largest Convex Subset</figcaption>
+</figure>
 
 						<div id="footer">
 	View this site's source code <a href="https://github.com/paullutkus/paullutkus.github.io">here</a>.

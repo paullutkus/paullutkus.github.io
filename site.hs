@@ -303,6 +303,8 @@ myPandocBiblioCompiler = do
             , Ext_citations
             , Ext_footnotes
             , Ext_raw_html
+            , Ext_link_attributes
+            , Ext_implicit_figures
             ]
         mathExtensions = 
             [ Ext_tex_math_dollars

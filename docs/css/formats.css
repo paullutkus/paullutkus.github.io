@@ -1,1 +1,1 @@
-section.indent{margin-left:1em}
+section.indent{margin-left:1em}figure{text-align:center}img+figcaption::before{content:"Figure\a0";font-weight:bold}
