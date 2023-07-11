@@ -12,3 +12,9 @@ img + figcaption::before {
     content: "Figure " counter(fig) ":\a0\a0";
     font-weight: bold;
 }
+span.math.inline {
+    font-size: 1.1em !important;
+}
+span.math.display {
+    font-size: 1.2em !important;
+}

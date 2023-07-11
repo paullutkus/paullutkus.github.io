@@ -50,7 +50,7 @@
 	
 	<!--Posted on July  9, 2023-->
 	<!--<br>-->
-	Last updated: July 10, 2023
+	Last updated: July 11, 2023
 	<br>
 	Tags: 
 	
@@ -58,7 +58,19 @@
 	
 		<a href="../../tags/posts/Convexity.html">Convexity</a>
 </div>
-<h1 id="introduction"><u>Introduction</u></h1>
+<br>
+<div class="toc"><h3>Table of Contents</h3>
+<ul>
+<li><a href="#introduction" id="toc-introduction"><span class="toc-section-number">1</span> <u>Introduction</u></a></li>
+<li><a href="#formulation" id="toc-formulation"><span class="toc-section-number">2</span> <u>Formulation</u></a>
+<ul>
+<li><a href="#the-optimization-problem" id="toc-the-optimization-problem"><span class="toc-section-number">2.1</span> The Optimization Problem</a></li>
+</ul></li>
+</ul>
+</div>
+<br>
+<br>
+<h1 data-number="1" id="introduction"><span class="header-section-number">1</span> <u>Introduction</u></h1>
 <p>Consider a closed, nonconvex figure in the plane. What is its largest convex
 subset? This does seem like a well founded question, and the problem as a
 whole can be used as a model for exploration as I’ll discuss.</p>
@@ -80,6 +92,25 @@ should also be pushed further until it’s flush (<a href="#fig2"><b>Figure 2</b
 <figcaption aria-hidden="true">Improved largest convex subset</figcaption>
 </figure>
 </div>
+<p>Of course, we also need to consider tradeoffs of curvature. Would the northwest
+side of the triangle capture more area if it curved outwards like one half of
+an oval? We’d better formalize the problem.</p>
+<h1 data-number="2" id="formulation"><span class="header-section-number">2</span> <u>Formulation</u></h1>
+<p>We’re optimizing over a collection, a set of sets. If we call the nonconvex
+set <span class="math inline">\(S\)</span>, the collection of interest here is
+<span class="math display">\[C=\{\ T\subset\mathbb{R}^2 \mid \mathcal{[}T\subset S\mathcal{]}\ ;\ \mathcal{[}\lambda x+(1-\lambda) y\in T\ \ \forall\ \ \lambda\in [0, 1],\ (x,y)\in T\mathcal{]}\ \}\]</span>
+The expression is a lot to parse, so I’ve written the two constraints with
+<span class="math inline">\(\mathcal{[}\)</span>calligraphic brackets<span class="math inline">\(\mathcal{]}\)</span>
+around them, and with a semicolon separating them. The first constraint is that
+<span class="math inline">\(T\)</span> must be a subset of <span class="math inline">\(S\)</span>, and the second is that <span class="math inline">\(S\)</span> is convex. Qualitatively
+though, <span class="math inline">\(C\)</span> is just the set of all subsets of <span class="math inline">\(S\)</span> that are convex.</p>
+<section id="the-optimization-problem" class="indent" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> The Optimization Problem</h2>
+<p>What we’re missing, in order to have an well-formulated optimization problem,
+is an objective. How can we express the area of a potential maximal convex
+subset?</p>
+</section>
+
 
 						<div id="footer">
 	View this site's source code <a href="https://github.com/paullutkus/paullutkus.github.io">here</a>.

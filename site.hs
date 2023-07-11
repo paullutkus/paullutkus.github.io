@@ -68,6 +68,10 @@ main = do
             route   idRoute
             compile copyFileCompiler 
 
+        match "files/*" $ do
+            route idRoute
+            compile copyFileCompiler
+
         match "fonts/**/*" $ do
             route   idRoute
             compile copyFileCompiler 
