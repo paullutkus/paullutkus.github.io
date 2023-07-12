@@ -115,7 +115,7 @@ main = do
                         <> defaultContext 
                 makeItem ""
                         >>= loadAndApplyTemplate "templates/tag.html" ctx
-                        >>= loadAndApplyTemplate "templates/default.html" ctx
+                        >>= loadAndApplyTemplate "templates/tag_base.html" ctx
                         >>= relativizeUrls
         ----------------------------
         --- Build tags for notes ---
@@ -137,7 +137,7 @@ main = do
                         <> defaultContext 
                 makeItem ""
                         >>= loadAndApplyTemplate "templates/tag.html" ctx
-                        >>= loadAndApplyTemplate "templates/default.html" ctx
+                        >>= loadAndApplyTemplate "templates/tag_base.html" ctx
                         >>= relativizeUrls 
         ---------------------
         --- Compile posts ---
