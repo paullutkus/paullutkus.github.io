@@ -15,7 +15,7 @@ as $n$ varies.
 
 :::{#fig1}
 
-![Nested $n$-ellipses [^1]](/images/n-ellipse.svg){ width=40% }
+![Nested $n$-ellipses [^1]](/images/n-ellipse.svg.png){width=3in}
 
 :::
 
