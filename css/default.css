@@ -220,3 +220,10 @@ div#header {
 .header-section-number::after {
     content: ".\a0";
 }
+
+span.math.inline {
+    font-size: 1.1em !important;
+}
+span.math.display {
+    font-size: 1.2em !important;
+}
