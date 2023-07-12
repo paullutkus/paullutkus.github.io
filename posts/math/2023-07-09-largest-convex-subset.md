@@ -52,7 +52,10 @@ though, $C$ is just the set of all subsets of $S$ that are convex.
 
 What we're missing, in order to have an well-formulated optimization problem,
 is an objective. How can we express the area of a potential maximal convex
-subset?
+subset? For a convex set in the plane, we can compute its area with a double
+integral. For instance, for our sets $T\in C$
+$$\iint_Tdx\;\!dy$$
+For some 
 
 :::
 
