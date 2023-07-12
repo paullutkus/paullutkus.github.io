@@ -72,8 +72,8 @@
 <br>
 <h1 data-number="1" id="introduction"><span class="header-section-number">1</span> <u>Introduction</u></h1>
 <p>Consider a closed, nonconvex figure in the plane. What is its largest convex
-subset? This does seem like a well founded question, and the problem as a
-whole can be used as a model for exploration as I’ll discuss.</p>
+subset? Though this does seem like a well founded question, the largest convex
+subset turns out to be challenging to compute.</p>
 <div id="fig1">
 <figure>
 <img src="../../images/doro.jpg" style="width:40.0%" alt="Largest convex subset" />
@@ -102,13 +102,14 @@ set <span class="math inline">\(S\)</span>, the collection of interest here is
 The expression is a lot to parse, so I’ve written the two constraints with
 <span class="math inline">\(\mathcal{[}\)</span>calligraphic brackets<span class="math inline">\(\mathcal{]}\)</span>
 around them, and with a semicolon separating them. The first constraint is that
-<span class="math inline">\(T\)</span> must be a subset of <span class="math inline">\(S\)</span>, and the second is that <span class="math inline">\(S\)</span> is convex. Qualitatively
-though, <span class="math inline">\(C\)</span> is just the set of all subsets of <span class="math inline">\(S\)</span> that are convex.</p>
+<span class="math inline">\(T\)</span> must be a subset of <span class="math inline">\(S\)</span>, and the second is that <span class="math inline">\(T\)</span> must be convex.
+In plain english, <span class="math inline">\(C\)</span> is just the set of all subsets of <span class="math inline">\(S\)</span> that are
+convex.</p>
 <section id="the-optimization-problem" class="indent" data-number="2.1">
 <h2 data-number="2.1"><span class="header-section-number">2.1</span> The Optimization Problem</h2>
 <p>What we’re missing, in order to have an well-formulated optimization problem,
-is an objective. How can we express the area of a potential maximal convex
-subset? For a convex set in the plane, we can compute its area with a double
+is an objective. How can we express the area of one of the subsets?
+For a convex set in the plane, we can compute its area with a double
 integral. For instance, for our sets <span class="math inline">\(T\in C\)</span>
 <span class="math display">\[\iint_Tdx\;\!dy\]</span>
 For some</p>

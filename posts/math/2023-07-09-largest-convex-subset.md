@@ -8,8 +8,8 @@ tags: Geometry, Convexity
 # [Introduction]{.underline} # 
 
 Consider a closed, nonconvex figure in the plane. What is its largest convex 
-subset? This does seem like a well founded question, and the problem as a 
-whole can be used as a model for exploration as I'll discuss.
+subset? Though this does seem like a well founded question, the largest convex 
+subset turns out to be challenging to compute.
 
 :::{#fig1}
 
@@ -43,16 +43,17 @@ $$C=\{\ T\subset\mathbb{R}^2 \mid \mathcal{[}T\subset S\mathcal{]}\ ;\ \mathcal{
 The expression is a lot to parse, so I've written the two constraints with
 $\mathcal{[}$calligraphic brackets$\mathcal{]}$ 
 around them, and with a semicolon separating them. The first constraint is that
- $T$ must be a subset of $S$, and the second is that $S$ is convex. Qualitatively 
-though, $C$ is just the set of all subsets of $S$ that are convex.
+ $T$ must be a subset of $S$, and the second is that $T$ must be convex. 
+In plain english, $C$ is just the set of all subsets of $S$ that are 
+convex.
 
 :::{.indent}
 
 ## The Optimization Problem ##
 
 What we're missing, in order to have an well-formulated optimization problem,
-is an objective. How can we express the area of a potential maximal convex
-subset? For a convex set in the plane, we can compute its area with a double
+is an objective. How can we express the area of one of the subsets? 
+For a convex set in the plane, we can compute its area with a double
 integral. For instance, for our sets $T\in C$
 $$\iint_Tdx\;\!dy$$
 For some 

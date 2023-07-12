@@ -21,10 +21,13 @@ as $n$ varies.
 
 The resources I intend to use are:
 
-* [Semidefinite Representations of The <i>K</i>-Ellipse; Nie, Parillo, and Sturmfels](https://mathweb.ucsd.edu/~njw/PUBLICPAPERS/kellipse_imaproc_toappear.pdf)
-*
-*
+1. [<b>Semidefinite Representations of The <i>K</i>-Ellipse</b> -- Nie, Parillo, and Sturmfels](https://mathweb.ucsd.edu/~njw/PUBLICPAPERS/kellipse_imaproc_toappear.pdf)
+2. [<b>The Geometry of Semidefinite Programming</b> -- Sturmfels](https://aimath.org/WWN/convexalggeom/AIM.pdf)
+3. [<b>On the Approximation of Convex, Closed Plane Curves by Multifocal Ellipses</b> -- Erd&ouml;s, Vincze](https://web.archive.org/web/20160928200222/http://renyi.mta.hu/~p_erdos/1982-18.pdf)
+4. [<b>n-Ellipses and the Minimum Distance Sum Problem</b> -- Sekino](https://www.math.ucdavis.edu/~deloera/MISC/LA-BIBLIO/trunk/nellipse.pdf)
 
+The item by Erd&ouml;s is exactly what I'm looking for and it suggests that 
+$n$-ellipses might be able to approximate any convex, closed plane curve.
 
 
 [^1]: [wikipedia.org/wiki/N-ellipse](https://en.wikipedia.org/wiki/N-ellipse)&nbsp;&nbsp;
