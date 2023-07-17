@@ -17,3 +17,12 @@ img + figcaption::before {
 .journalDate {
     opacity: 0.33;
 }
+
+.columns {
+    display: flex;
+}
+.column {
+    display: flex;
+    align-items: center;
+    flex: 50%;
+}

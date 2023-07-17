@@ -303,6 +303,9 @@ myPandocBiblioCompiler = do
     toc        <- getMetadataField underlying "tableOfContents"
     let markdownExtensions = 
             [ Ext_markdown_in_html_blocks 
+            , Ext_native_divs
+            , Ext_native_spans
+            , Ext_fenced_divs
             , Ext_bracketed_spans
             , Ext_citations
             , Ext_footnotes
@@ -345,7 +348,7 @@ myPandocBiblioCompiler = do
 withToc :: WriterOptions -> WriterOptions
 withToc options = options { writerNumberSections  = True
                           , writerTableOfContents = True
-                          , writerTOCDepth        = 2
+                          , writerTOCDepth        = 3
                           , writerTemplate        = Just tocTemplate
                           }
 

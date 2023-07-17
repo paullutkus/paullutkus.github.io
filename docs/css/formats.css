@@ -1,1 +1,1 @@
-section.indent{margin-left:1em}body{counter-reset:fig}figure{text-align:center}img+figcaption::before{counter-increment:fig 1;content:"Figure " counter(fig) ":\a0\a0";font-weight:bold}.journalDate{opacity:0.33}
+section.indent{margin-left:1em}body{counter-reset:fig}figure{text-align:center}img+figcaption::before{counter-increment:fig 1;content:"Figure " counter(fig) ":\a0\a0";font-weight:bold}.journalDate{opacity:0.33}.columns{display:flex}.column{display:flex;align-items:center;flex:50%}

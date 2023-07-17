@@ -50,7 +50,7 @@
 	
 	<!--Posted on July  9, 2023-->
 	<!--<br>-->
-	Last updated: July 12, 2023
+	Last updated: July 17, 2023
 	<br>
 	Tags: 
 	
@@ -64,7 +64,11 @@
 <li><a href="#introduction" id="toc-introduction"><span class="toc-section-number">1</span> <u>Introduction</u></a></li>
 <li><a href="#formulation" id="toc-formulation"><span class="toc-section-number">2</span> <u>Formulation</u></a>
 <ul>
-<li><a href="#the-optimization-problem" id="toc-the-optimization-problem"><span class="toc-section-number">2.1</span> The Optimization Problem</a></li>
+<li><a href="#area-of-a-closed-plane-curve" id="toc-area-of-a-closed-plane-curve"><span class="toc-section-number">2.1</span> Area of a Closed Plane Curve</a>
+<ul>
+<li><a href="#quadratic-example" id="toc-quadratic-example"><span class="toc-section-number">2.1.1</span> Quadratic Example</a></li>
+<li><a href="#ellipse-example" id="toc-ellipse-example"><span class="toc-section-number">2.1.2</span> Ellipse Example</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -94,7 +98,9 @@ should also be pushed further until it’s flush (<a href="#fig2"><b>Figure 2</b
 </div>
 <p>Of course, we also need to consider tradeoffs of curvature. Would the northwest
 side of the triangle capture more area if it curved outwards like one half of
-an oval? We’d better formalize the problem.</p>
+an oval? We’d better formalize the problem.<br />
+<br />
+</p>
 <h1 data-number="2" id="formulation"><span class="header-section-number">2</span> <u>Formulation</u></h1>
 <p>We’re optimizing over a collection, a set of sets. If we call the nonconvex
 set <span class="math inline">\(S\)</span>, the collection of interest here is
@@ -105,14 +111,78 @@ around them, and with a semicolon separating them. The first constraint is that
 <span class="math inline">\(T\)</span> must be a subset of <span class="math inline">\(S\)</span>, and the second is that <span class="math inline">\(T\)</span> must be convex.
 In plain english, <span class="math inline">\(C\)</span> is just the set of all subsets of <span class="math inline">\(S\)</span> that are
 convex.</p>
-<section id="the-optimization-problem" class="indent" data-number="2.1">
-<h2 data-number="2.1"><span class="header-section-number">2.1</span> The Optimization Problem</h2>
+<section id="area-of-a-closed-plane-curve" class="indent" data-number="2.1">
+<h2 data-number="2.1"><span class="header-section-number">2.1</span> Area of a Closed Plane Curve</h2>
 <p>What we’re missing, in order to have an well-formulated optimization problem,
 is an objective. How can we express the area of one of the subsets?
 For a convex set in the plane, we can compute its area with a double
-integral. For instance, for our sets <span class="math inline">\(T\in C\)</span>
-<span class="math display">\[\iint_Tdx\;\!dy\]</span>
-For some</p>
+integral. For instance, for our sets <span class="math inline">\(T\in C\)</span></p>
+<p><span class="math display">\[\textbf{area}(T)=\iint_Tdx\;\!dy\]</span></p>
+<p>Let’s calculate a few very simple double integrals to get a feel for what’s
+going on. There are two informal ways to think about double integrals that
+I’ve seen. The first is approaching the computation as two, sequential integrals
+– one in <span class="math inline">\(x\)</span> in the other in <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\[\int_{y_0}^{y_f}\int_{x_0}^{x_f}dx\;\!dy\ .\]</span></p>
+<h3 data-number="2.1.1" id="quadratic-example"><span class="header-section-number">2.1.1</span> Quadratic Example</h3>
+<p>A simple example is computing the area enclosed by <span class="math inline">\(y=\sqrt{x}\)</span> and <span class="math inline">\(y=x^2\)</span>.
+Let the inner integrals (integrals plural, since we have an <span class="math inline">\(x\)</span>-integral for
+each term of the <span class="math inline">\(y\)</span>-integral) be over <span class="math inline">\(dx\)</span>. The inner integrals will vary
+in their bounds as a function of <span class="math inline">\(y\)</span>, and the outer integral is bounded by the
+lower and upper extent of the figure in the <span class="math inline">\(y\)</span>-dimension.</p>
+<p><span class="math display">\[\int_{y=0}^{y=1}\int_{x=y^2}^{x=\sqrt{y}}dx\;\!dy=\frac{2}{3}y^{3/2}-\frac{1}{3}y^3\bigg\vert_0^1=\frac{1}{3}\]</span></p>
+<div id="fig3">
+<figure>
+<img src="../../images/lcs_quadratic.jpg" style="width:3in" alt="x-bounds vary in y" />
+<figcaption aria-hidden="true"><span class="math inline">\(x\)</span>-bounds vary in <span class="math inline">\(y\)</span></figcaption>
+</figure>
+</div>
+<h3 data-number="2.1.2" id="ellipse-example"><span class="header-section-number">2.1.2</span> Ellipse Example</h3>
+<p><span class="journalDate">[<b><i>7/16/23 </i></b>] </span> If you wanted to compute the area of an ellipse, one approach would be to
+isolate the top half of the ellipse, compute the area between it and the
+<span class="math inline">\(x\)</span>-axis, and then double the result to get the total area. The procedure would
+look something like this: start with an ellipse <span class="math inline">\(E\)</span></p>
+<p><span class="math display">\[E(a',b',r)=\left\{(x,y)\in\mathbb{R}^2\ \bigg\vert\ \left(\frac{x}{a'}\right)^2+\left(\frac{y}{b'}\right)^2=r^2\right\}\ .\]</span></p>
+<p>Note that we can simplify the expression by defining <span class="math inline">\(a=a'r\)</span> and <span class="math inline">\(b=b'r\)</span>.</p>
+<p><span class="math display">\[\implies E(a,b)=\left\{(x,y)\in\mathbb{R}^2\ \bigg\vert\ \left(\frac{x}{a}\right)^2+\left(\frac{y}{b}\right)^2=1\right\}\ .\]</span></p>
+<p>Working with the constraint, we isolate <span class="math inline">\(x\)</span>, integrate, then double to get the area:</p>
+<p><span class="math display">\[y=b\sqrt{1-\left(\frac{x}{a}\right)^2}\]</span></p>
+<div class="columns">
+<div class="column">
+<p><span class="math display">\[\implies\textbf{area}(\:\!E(a,b)\:\!)=2\int_{-a}^{a}b\sqrt{1-\left(\frac{x}{a}\right)^2}\ dx\ .\]</span></p>
+</div><div class="column">
+<figure>
+<img src="../../images/lcs_ellipse_single_integral.jpg" style="height:1.75in" alt="Area via single integral along x" />
+<figcaption aria-hidden="true">Area via single integral along <span class="math inline">\(x\)</span></figcaption>
+</figure>
+</div>
+</div>
+<p><br />
+</p>
+<p>Consider the substitution <span class="math inline">\(x/a=sin(\theta)\implies dx=a\cos(\theta)d\theta\)</span>,
+giving</p>
+<p><span class="math display">\[2ab\int_{\pi}^{0}\cos^2(\theta)\ d\theta\ .\]</span></p>
+<p>The integral of <span class="math inline">\(\cos^2(\theta)\)</span> can itself be solved by a substitution,
+<span class="math inline">\(\cos^2(\theta)=\frac{1+\cos(2\theta)}{2}\)</span>:</p>
+<p><span class="math display">\[2ab\int_{\pi}^{0}\cos^2(\theta)\ d\theta = ab\left[\int_{\pi}^{0}\ d\theta+\int_{\pi}^{0}\cos(2\theta)\ d\theta\right]\]</span></p>
+<p><span class="math display">\[=ab\left[\arcsin(x/a)+\frac{1}{2}\sin(2\arcsin(x/a))\right]\bigg\vert_{-a}^{a}\ .\]</span></p>
+<p>Though at this point we could simply plug in the bounds, here’s one last trick.
+To simplify the second term, notice that</p>
+<p><span class="math display">\[\sin(2x)=2\sin x\cos x\implies\sin(2\arcsin(x/a))=2(x/a)\cos\left(\arcsin(x/a)\right)\ .\]</span></p>
+<p>In our integral, we’re left to evaluate <span class="math inline">\(\cos(\arcsin(x/a))\)</span>. Arcsine is the
+function which takes a value of sine (i.e. in the interval <span class="math inline">\([-1, 1]\)</span>) and maps
+it to the first angle (increasing, starting from <span class="math inline">\(-\pi/2\)</span>) that yields it as the
+angle’s sine value. In our case, <span class="math inline">\(\arcsin(x/a)\)</span> is wrapped in <span class="math inline">\(\cos()\)</span>, meaning
+that our output is the associated cosine value of the sine value we
+originally passed as input to the arcsine, such that the pairing lies on the
+unit circle.</p>
+<p>To further understand the exact pairing of sine-value
+<span class="math inline">\(x\)</span>-coordinates to cosine-value <span class="math inline">\(y\)</span>-coordinates, we can pass the entire interval
+<span class="math inline">\([-1, 1]\)</span> through arcsine and observe that it produces the interval
+<span class="math inline">\([-\frac{\pi}{2},\frac{\pi}{2}]\)</span>. As the argument of cosine varies from
+<span class="math inline">\(-\frac{\pi}{2}\)</span> to <span class="math inline">\(\frac{\pi}{2}\)</span>, the output of cosine varies from <span class="math inline">\(0\)</span> to
+<span class="math inline">\(1\)</span> and back to <span class="math inline">\(0\)</span>. Having observered that the input-output pairings of
+<span class="math inline">\(\cos(\arcsin(x/a))\)</span> form the upper half of the circle, we can conclude that</p>
+<p><span class="math display">\[\cos(\arcsin(x/a))=\sqrt{1-\left(\frac{x}{a}\right)^2}\ .\]</span></p>
 </section>
 
 
