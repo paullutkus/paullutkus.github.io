@@ -79,7 +79,7 @@ $$\int_{y=0}^{y=1}\int_{x=y^2}^{x=\sqrt{y}}dx\;\!dy=\frac{2}{3}y^{3/2}-\frac{1}{
 
 :::{#fig3}
 
-![$x$-bounds vary in $y$](/images/lcs_quadratic.jpg){ width=3in }
+![$x$-bounds vary in $y$](/images/lcs_quadratic.jpg){ height=13em }
 
 :::
 
@@ -106,7 +106,7 @@ $$y=b\sqrt{1-\left(\frac{x}{a}\right)^2}$$
 $$\implies\textbf{area}(\:\!E(a,b)\:\!)=2\int_{-a}^{a}b\sqrt{1-\left(\frac{x}{a}\right)^2}\ dx\ .$$
 :::
 ::: column
-![Area via single integral along $x$](/images/lcs_ellipse_single_integral.jpg){ height=175px }
+![Area via single integral along $x$](/images/lcs_ellipse_single_integral.jpg){ height=10em }
 :::
 ::::::
 \
