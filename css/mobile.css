@@ -103,4 +103,7 @@
     span.math.display {
         font-size: 0.9em !important;
     }
+    img {
+        font-size: 50px; 
+    }
 }

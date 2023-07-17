@@ -13,7 +13,7 @@ subset turns out to be challenging to compute.
 
 :::{#fig1}
 
-![Largest convex subset](/images/doro.jpg){ width=40% }
+![Largest convex subset](/images/doro.jpg){ width=13em }
 
 :::
 
@@ -27,7 +27,7 @@ should also be pushed further until it's flush ([<b>Figure 2</b>](#fig2)).
 
 :::{#fig2}
 
-![Improved largest convex subset](/images/doro_annotated.png){ width=40% }
+![Improved largest convex subset](/images/doro_annotated.png){ width=13em }
 
 :::
 
@@ -79,7 +79,7 @@ $$\int_{y=0}^{y=1}\int_{x=y^2}^{x=\sqrt{y}}dx\;\!dy=\frac{2}{3}y^{3/2}-\frac{1}{
 
 :::{#fig3}
 
-![$x$-bounds vary in $y$](/images/lcs_quadratic.jpg){ height=13em }
+![$x$-bounds vary in $y$](/images/lcs_quadratic.jpg){ height=12em }
 
 :::
 
@@ -106,7 +106,7 @@ $$y=b\sqrt{1-\left(\frac{x}{a}\right)^2}$$
 $$\implies\textbf{area}(\:\!E(a,b)\:\!)=2\int_{-a}^{a}b\sqrt{1-\left(\frac{x}{a}\right)^2}\ dx\ .$$
 :::
 ::: column
-![Area via single integral along $x$](/images/lcs_ellipse_single_integral.jpg){ height=10em }
+![Area via single integral along $x$](/images/lcs_ellipse_single_integral.jpg){ height=8em }
 :::
 ::::::
 \
