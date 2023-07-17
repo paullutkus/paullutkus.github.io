@@ -106,7 +106,7 @@ $$y=b\sqrt{1-\left(\frac{x}{a}\right)^2}$$
 $$\implies\textbf{area}(\:\!E(a,b)\:\!)=2\int_{-a}^{a}b\sqrt{1-\left(\frac{x}{a}\right)^2}\ dx\ .$$
 :::
 ::: column
-![Area via single integral along $x$](/images/lcs_ellipse_single_integral.jpg){ height=1.75in }
+![Area via single integral along $x$](/images/lcs_ellipse_single_integral.jpg){ height=175px }
 :::
 ::::::
 \
