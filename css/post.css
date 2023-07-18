@@ -62,15 +62,15 @@ div.info {
     width: 1em;
 }
 .back .caption {
-    padding-bottom: 1.20em;
+    /*padding-bottom: 1.20em;*/
     margin-top:-0.20em;
 }
 .nonPost {
     width: var(--mainWidth);
 }
 body {
-    height: 100%;
-    width: 100%; 
+    /*height: 100%;*/
+    width: var(--mainWidth); 
 }
 body p {
     margin-top: 0;
@@ -83,4 +83,31 @@ div.sourceCode {
 }
 code {
     tab-size: 4;
+}
+div.leftButton {
+    opacity: 0.25;
+    position: fixed;
+    top: 1vh;
+    left: calc(var(--mainWidth)/2 - 2.75em);
+}
+div.leftButton:hover {
+    opacity:1;
+}
+div.rightButton {
+    opacity: 0.25;
+    position: fixed;
+    top: 1vh;
+    left: calc(var(--mainWidth)/2 - 0.7em);
+}
+div.rightButton:hover {
+    opacity: 1;
+}
+div.leftButton a {
+    text-decoration: none;
+}
+div.rightButton a {
+    text-decoration: none;
+}
+.upArrow {
+    transform: rotate(-270deg) scaleY(-1) translate(8%, 0);
 }

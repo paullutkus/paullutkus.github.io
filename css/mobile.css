@@ -10,8 +10,9 @@
         font-family: "EB-Garamond";
         color: black;
         font-size: 49px;
-        margin: 0 auto 0 auto;
-        width: auto;
+        width: 92%;
+        margin-left: 2%;
+        /*margin: 0 auto 0 auto;*/
         list-style-type: none;
     }
     div#header {
@@ -77,14 +78,14 @@
         margin-left: 0;
     }
     .back {
-        margin-top:-3.72em;
+        /*margin-top:-3.72em;*/
     }
     .back img {
-        padding-left: 1.5em;
+        /*padding-left: 1.5em;*/
     }
     .back .caption {
-        padding-bottom: 3.3em;
-        padding-left: 1em;
+        /*padding-bottom: 3.3em;*/
+        /*padding-left: 1em;*/
     }
     div.info {
         font-size: 40px;
@@ -108,5 +109,35 @@
     }
     img {
         font-size: 50px; 
+    }
+    div.leftButton {
+        opacity: 0.25;
+        position: fixed;
+        top: 1%;
+        left: 3%;
+    }
+    div.leftButton:hover .rightButton:active {
+        opacity:1;
+    }
+    div.rightButton {
+        opacity: 0.25;
+        position: fixed;
+        top: 1%;
+        left: 55%;
+    }
+    div.rightButton:hover .rightButton:active {
+        opacity: 1;
+    }
+    div.leftButton a {
+        text-decoration: none;
+    }
+    div.rightButton a {
+        text-decoration: none;
+    }
+    .upArrow {
+        transform: rotate(-270deg) scaleY(-1) translate(15%, 0);
+    }
+    section.indent {
+        margin-left: 0;
     }
 }
