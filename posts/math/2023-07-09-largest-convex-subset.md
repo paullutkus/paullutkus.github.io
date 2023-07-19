@@ -5,7 +5,7 @@ tableOfContents: true
 tags: Geometry, Convexity
 ---
 
-# [Introduction]{.underline} # 
+# [Introduction]{.underline}[[]{.toTop}](#header){.ta} #
 
 Consider a closed, nonconvex figure in the plane. What is its largest convex 
 subset? Though this does seem like a well founded question, the largest convex 
@@ -16,7 +16,6 @@ subset turns out to be challenging to compute.
 ![Largest convex subset](/images/doro.jpg){ width=13em }
 
 :::
-
 
 [<b>Figure 1</b>](#fig1) illustrates the question at hand. The amoeba shape is 
 the nonconvex set in question, and the shaded triangle is a guess at the 
@@ -37,7 +36,7 @@ an oval? We'd better formalize the problem.
 \
 \
 
-# [Formulation]{.underline} #
+# [Formulation]{.underline}[[]{.toTop}](#header){.ta} #
 
 We're optimizing over a collection, a set of sets. If we call the nonconvex 
 set $S$, the collection of interest here is
@@ -51,7 +50,7 @@ convex.
 
 :::{.indent}
 
-## Area of a Closed Plane Curve ##
+## Area of a Closed Plane Curve[[]{.toTop}](#header){.ta} ##
 
 What we're missing, in order to have an well-formulated optimization problem,
 is an objective. How can we express the area of one of the subsets? 
@@ -67,7 +66,7 @@ I've seen. The first is approaching the computation as two, sequential integrals
 
 $$\int_{y_0}^{y_f}\int_{x_0}^{x_f}dx\;\!dy\ .$$
 
-### Quadratic Example ###
+### Quadratic Example[[]{.toTop}](#header){.ta} ###
 
 A simple example is computing the area enclosed by $y=\sqrt{x}$ and $y=x^2$. 
 Let the inner integrals (integrals plural, since we have an $x$-integral for 
@@ -83,7 +82,7 @@ $$\int_{y=0}^{y=1}\int_{x=y^2}^{x=\sqrt{y}}dx\;\!dy=\frac{2}{3}y^{3/2}-\frac{1}{
 
 :::
 
-### Ellipse Example ###
+### Ellipse Example[[]{.toTop}](#header){.ta} ###
 
 [[<b><i>7/16/23 </i></b>]&nbsp;]{.journalDate} If you wanted to compute the area of an ellipse, one approach would be to 
 isolate the top half of the ellipse, compute the area between it and the 

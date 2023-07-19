@@ -82,7 +82,7 @@ main = do
         ---------------------------------------
         --- Compile contact and about pages ---
         ---------------------------------------
-        match "about.rst" $ do
+        match "about.md" $ do
             route   $ setExtension "html"
             compile $ myPandocBiblioCompiler
                 >>= loadAndApplyTemplate "templates/about_base.html" defaultContext
