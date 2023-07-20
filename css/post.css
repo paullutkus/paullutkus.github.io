@@ -4,49 +4,6 @@ div.info {
     margin-top: -0.66em;
     margin-bottom: 2em;
 }
-.flex-container {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    /* 100% viewport width plus half sidebar width (in pct) */
-    width: calc(100 + var(--leftShift));
-    height: 100vh;
-    margin-left: calc(2 * var(--leftShift));
-    flex-wrap: nowrap;
-    overflow: auto;
-}
-.flex-item-side {
-    min-width: var(--sideWidth);
-    top: 0;
-    position: -webkit-sticky;
-    position: sticky;
-    padding-right: 0.25em;
-}
-.flex-item-main {
-    width: var(--mainWidth);
-    height: 100%;
-}
-.flex-body {
-    font-size:0;
-}
-.flex-body-more {
-    float: left;
-    clear: left;
-    width: 100%
-}
-.h-full {  height: 100% }
-.w-full {  width: 100% }
-/* equivalent to inner-wrapper
- * in https://stackoverflow.com/questions/39196841/flexbox-align-item-to-specified-baseline */
-.baseline {
-    display: inline-block;
-    text-align: left;
-}
-.flex-img {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
 .wah {
     font-size: 0px;
 }
@@ -62,14 +19,12 @@ div.info {
     width: 1em;
 }
 .back .caption {
-    /*padding-bottom: 1.20em;*/
     margin-top:-0.20em;
 }
 .nonPost {
     width: var(--mainWidth);
 }
 body {
-    /*height: 100%;*/
     width: var(--mainWidth); 
 }
 body p {
