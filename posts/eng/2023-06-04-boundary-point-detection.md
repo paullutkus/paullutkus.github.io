@@ -47,19 +47,23 @@ Loosely, the procedure is as follows:
 </u>
 
 > 	1. Find the maximum point along a dimension 
->	   (wlog, highest point in Y), call it
->	   the 'first focus'.
-> 	2. Repeat 3-5 until the 'new focus' is the 
->	   first focus:
->	3. Find the point which generates the minimum 
->	   nonnegative slope (m) when paired with the 
->	   focus.
->	4. Let this point be the 'new focus', and add 
-> 	   it to the hull.
->	5. Rotate the dataset clockwise by arctan(m) 
-> 	   around the new focus, so that it is 
->	   horizontally aligned with the previous 
->	   focus.
+>	   (wlog, highest point in Y), this is the
+>	   first hull point.
+>	
+>	2. Repeat 3-5 until the 'new hull point' is 
+>	   the first one:
+>	
+>	3. Find the point whose slope with the previous
+>	   hull point makes the minimum counterclockwise 
+>	   angle (we'll call it theta) starting from pi.
+>	
+>	4. This is the next hull point. Add it to the 
+>	   hull.
+>	
+>	5. Center the dataset on the new hull point, and 
+>	   then rotate clockwise by theta so that the 
+>	   new hull point is horizontally aligned with 
+>	   the previous one.
 
 Since, for each hull point, we must iterate through each of the other $n$
 points, this procedure has a time-complexity of $O(hn)$, where $h$ is the 
